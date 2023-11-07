@@ -68,6 +68,10 @@ const signOut = () =>
 
 const verifyGoogleAuth = (googleData) =>
     new Promise((resolve, reject) => {
+        let CSRF_token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+
         var url = `${Constants.baseUrl}/api/auth/verify`;
         var data = {
             idToken: googleData.credential,
@@ -78,6 +82,7 @@ const verifyGoogleAuth = (googleData) =>
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
+                "X-CSRF-TOKEN": CSRF_token,
             },
             body: JSON.stringify(data),
         })
