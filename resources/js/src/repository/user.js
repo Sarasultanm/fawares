@@ -8,6 +8,7 @@ const getProfile = () =>
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                Accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         })
@@ -40,6 +41,7 @@ const signOut = () =>
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                Accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         })
@@ -75,6 +77,7 @@ const verifyGoogleAuth = (googleData) =>
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Accept: "application/json",
             },
             body: JSON.stringify(data),
         })
