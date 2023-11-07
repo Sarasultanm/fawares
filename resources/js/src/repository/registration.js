@@ -3,6 +3,9 @@ import Constants from "../utilities/constants";
 const ramakaRegistration = (payload) =>
     new Promise(async (resolve, reject) => {
         var url = `${Constants.baseUrl}/api/register`;
+        let CSRF_token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
 
         const formData = new FormData();
         Object.keys(payload).forEach(async (key) => {
@@ -13,6 +16,7 @@ const ramakaRegistration = (payload) =>
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "X-CSRF-TOKEN": CSRF_token,
             },
             body: formData,
         })
