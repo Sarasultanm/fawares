@@ -52,7 +52,7 @@ export default () => {
         { title: t("Schedule"), description: "" },
     ];
     const { activeStep, setActiveStep } = useSteps({
-        index: 3,
+        index: 1,
         count: steps.length,
     });
 
