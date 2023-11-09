@@ -48,16 +48,16 @@ export default ({ payload, onSavePayload, onBack }) => {
                 onSubmit={(values, actions) => {
                     if (!values) return;
 
-                    if (!horseDocument) {
-                        actions.setSubmitting(false);
-                        toast({
-                            title: "Official horse document is required! ",
-                            status: "error",
-                            isClosable: true,
-                            position: "top",
-                        });
-                        return;
-                    }
+                    // if (!horseDocument) {
+                    //     actions.setSubmitting(false);
+                    //     toast({
+                    //         title: "Official horse document is required! ",
+                    //         status: "error",
+                    //         isClosable: true,
+                    //         position: "top",
+                    //     });
+                    //     return;
+                    // }
 
                     setTimeout(() => {
                         onSavePayload({
@@ -70,7 +70,7 @@ export default ({ payload, onSavePayload, onBack }) => {
             >
                 {(props) => (
                     <Form>
-                        <Container marginTop={"16px"} />
+                        <Container marginTop={"24px"} />
                         <Field
                             name="horseName"
                             validate={(value) => {
@@ -99,7 +99,7 @@ export default ({ payload, onSavePayload, onBack }) => {
                                 </FormControl>
                             )}
                         </Field>
-                        <Container marginTop={"16px"} />
+                        <Container marginTop={"24px"} />
                         <Field name="pedigree">
                             {({ field, form }) => (
                                 <FormControl
@@ -118,7 +118,7 @@ export default ({ payload, onSavePayload, onBack }) => {
                                 </FormControl>
                             )}
                         </Field>
-                        <Container marginTop={"16px"} />
+                        <Container marginTop={"24px"} />
                         <Field
                             name="horseRegistrationNumber"
                             validate={(value) => {
@@ -149,11 +149,16 @@ export default ({ payload, onSavePayload, onBack }) => {
                                 </FormControl>
                             )}
                         </Field>
-                        <Container marginTop={"16px"} />
+                        <Container marginTop={"24px"} />
                         <FormControl isRequired={true}>
                             <FormLabel>
                                 {t("Horse Official Document")}
                             </FormLabel>
+                            <Text fontSize={"xs"}>
+                                You can upload or bring the horse official
+                                document during the competition.
+                            </Text>
+                            <Container marginTop={"16px"} />
                             <FilePicker
                                 onFileChange={(fileList) => {
                                     setHorseDocument(fileList[0]);
@@ -166,9 +171,8 @@ export default ({ payload, onSavePayload, onBack }) => {
                                 hideClearButton={true}
                             />
                         </FormControl>
-                        <Flex>
+                        <Flex mt={"32px"}>
                             <Button
-                                mt={4}
                                 colorScheme="teal"
                                 isLoading={props.isSubmitting}
                                 onClick={onBack}

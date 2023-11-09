@@ -37,6 +37,8 @@ const resources = {
                 "Beginners/children under 16 years old are not allowed to participate in Ramka tournaments for young ages.",
             "Google sign in":
                 "Please log in with your Google account to proceed to the registration.",
+            "Horse Document Instruction":
+                "You can upload or bring the horse official document during the competition.",
         },
     },
     ar: {
@@ -70,6 +72,8 @@ const resources = {
                 "- لا يسمح للـ (المبتدأين / الأطفال أقل من 16 سنة) بالمشاركة في بطولات رمكة للأعمار الصغيرة.",
             "Google sign in":
                 "يرجى تسجيل الدخول باستخدام حساب Google الخاص بك لمتابعة التسجيل.",
+            "Horse Document Instruction":
+                "يمكنك تحميل أو إحضار الوثيقة الرسمية للحصان خلال المسابقة.",
         },
     },
 };

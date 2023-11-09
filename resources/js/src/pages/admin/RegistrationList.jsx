@@ -22,6 +22,7 @@ import {
     InputRightElement,
     Button,
     Tooltip,
+    Center,
 } from "@chakra-ui/react";
 import { ramakaRegistrationList } from "../../repository/registration";
 import { ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons";
@@ -67,46 +68,46 @@ export default () => {
         <>
             <Header />
             <VStack padding={"16px 16px"}>
+                <Center marginBottom={"24px"}>
+                    <Tooltip
+                        hasArrow
+                        label="Search by rider name, federation ID, horse name or horse registration number."
+                        color={"white"}
+                        bg="teal"
+                        alignSelf={"flex-end"}
+                    >
+                        <InputGroup size="md">
+                            <InputLeftElement pointerEvents="none">
+                                <SearchIcon color="gray.300" />
+                            </InputLeftElement>
+
+                            <Input
+                                pr="4.5rem"
+                                placeholder="Search"
+                                onChange={(val) =>
+                                    (searchKey = val.target.value)
+                                }
+                            />
+                            <InputRightElement width="4.5rem">
+                                <Button
+                                    h="1.75rem"
+                                    size="sm"
+                                    marginRight={"8px"}
+                                    backgroundColor={"teal"}
+                                    fontSize={"12px"}
+                                    isLoading={isFetching}
+                                    onClick={() => getList()}
+                                >
+                                    Search
+                                </Button>
+                            </InputRightElement>
+                        </InputGroup>
+                    </Tooltip>
+                </Center>
                 <TableContainer>
                     <Table variant="simple">
                         <Thead>
                             <Tr>
-                                <Th>
-                                    <Tooltip
-                                        hasArrow
-                                        label="Search by rider name, federation ID, horse name or horse registration number."
-                                        color={"white"}
-                                        bg="teal"
-                                    >
-                                        <InputGroup size="md">
-                                            <InputLeftElement pointerEvents="none">
-                                                <SearchIcon color="gray.300" />
-                                            </InputLeftElement>
-
-                                            <Input
-                                                pr="4.5rem"
-                                                placeholder="Search"
-                                                onChange={(val) =>
-                                                    (searchKey =
-                                                        val.target.value)
-                                                }
-                                            />
-                                            <InputRightElement width="4.5rem">
-                                                <Button
-                                                    h="1.75rem"
-                                                    size="sm"
-                                                    marginRight={"8px"}
-                                                    backgroundColor={"teal"}
-                                                    fontSize={"12px"}
-                                                    isLoading={isFetching}
-                                                    onClick={() => getList()}
-                                                >
-                                                    Search
-                                                </Button>
-                                            </InputRightElement>
-                                        </InputGroup>
-                                    </Tooltip>
-                                </Th>
                                 <Th>Rider Name</Th>
                                 <Th>Rider Age</Th>
                                 <Th>Federation ID</Th>
@@ -117,8 +118,7 @@ export default () => {
                         <Tbody>
                             {list.map((e) => {
                                 return (
-                                    <Tr>
-                                        <Td></Td>
+                                    <Tr key={e?.id}>
                                         <Td>{e?.rider_name}</Td>
                                         <Td>{e?.rider_age}</Td>
                                         <Td>{e?.federation_id}</Td>
@@ -154,7 +154,7 @@ export default () => {
                                         <Td>
                                             <VStack alignItems={"flex-start"}>
                                                 {e?.schedules?.map((e) => (
-                                                    <>
+                                                    <div key={e?.id}>
                                                         <Text>
                                                             {
                                                                 e?.sched_data
@@ -172,7 +172,7 @@ export default () => {
                                                                 }
                                                             </Badge>
                                                         </Text>
-                                                    </>
+                                                    </div>
                                                 ))}
                                             </VStack>
                                         </Td>

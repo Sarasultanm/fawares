@@ -26,7 +26,7 @@ export default ({ payload, onSavePayload }) => {
 
     return (
         <Container>
-            <Text marginTop={"16px"} fontWeight={"bold"}>
+            <Text marginTop={"24px"} fontWeight={"bold"}>
                 {t("Rider Information")}
             </Text>
             <Formik
@@ -41,7 +41,7 @@ export default ({ payload, onSavePayload }) => {
             >
                 {(props) => (
                     <Form>
-                        <Container marginTop={"16px"} />
+                        <Container marginTop={"24px"} />
                         <Field
                             name="riderName"
                             validate={(value) => {
@@ -70,7 +70,7 @@ export default ({ payload, onSavePayload }) => {
                                 </FormControl>
                             )}
                         </Field>
-                        <Container marginTop={"16px"} />
+                        <Container marginTop={"24px"} />
                         <Field
                             name="riderAge"
                             validate={(value) => {
@@ -105,7 +105,7 @@ export default ({ payload, onSavePayload }) => {
                                 </FormControl>
                             )}
                         </Field>
-                        <Container marginTop={"16px"} />
+                        <Container marginTop={"24px"} />
                         <Field
                             name="federationId"
                             validate={(value) => {

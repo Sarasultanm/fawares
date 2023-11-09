@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Step,
     StepDescription,
@@ -13,6 +13,11 @@ import {
     Container,
     Center,
     useToast,
+    useMediaQuery,
+    HStack,
+    Flex,
+    Spacer,
+    Divider,
 } from "@chakra-ui/react";
 import { Box, Text, VStack } from "@chakra-ui/react";
 import RiderInformation from "./RiderInformation";
@@ -29,7 +34,7 @@ import {
 } from "../../reducers/user/userSlice";
 import { verifyGoogleAuth } from "../../repository/user";
 import { ramakaRegistration } from "../../repository/registration";
-import { getProfile } from "../../repository/user";
+import { ArrowForwardIcon, WarningIcon } from "@chakra-ui/icons";
 
 export default () => {
     const { t } = useTranslation();
@@ -51,6 +56,8 @@ export default () => {
         count: steps.length,
     });
 
+    const [isMoreThan800] = useMediaQuery("(min-width: 800px)");
+
     const verifyAuth = async (googleData) => {
         try {
             dispatch(updateLoading(true));
@@ -62,23 +69,6 @@ export default () => {
             dispatch(updateLoading(false));
         }
     };
-
-    const fetchProfile = async () => {
-        try {
-            dispatch(updateLoading(true));
-            let result = await getProfile();
-            dispatch(setProfile(result));
-            dispatch(updateLoading(false));
-        } catch (e) {
-            dispatch(updateLoading(false));
-        }
-    };
-
-    useEffect(() => {
-        if (localStorage.getItem("token")) {
-            fetchProfile();
-        }
-    }, []);
 
     if (isFetching && !profile) {
         return (
@@ -120,8 +110,8 @@ export default () => {
         );
     }
 
-    return (
-        <VStack>
+    const FormStepper = () => {
+        return (
             <Stepper index={activeStep} width={"100%"} padding={"40px 20%"}>
                 {steps.map((step, index) => (
                     <Step key={index}>
@@ -144,64 +134,98 @@ export default () => {
                     </Step>
                 ))}
             </Stepper>
-            {activeStep == 1 && (
-                <RiderInformation
-                    payload={payload}
-                    onSavePayload={(data) => {
-                        setPayload({
-                            ...payload,
-                            ...data,
-                        });
-                        setActiveStep(2);
-                    }}
-                />
-            )}
-            {activeStep == 2 && (
-                <HorseInformation
-                    payload={payload}
-                    onBack={() => {
-                        setActiveStep(1);
-                    }}
-                    onSavePayload={(data) => {
-                        setPayload({
-                            ...payload,
-                            ...data,
-                        });
+        );
+    };
 
-                        setActiveStep(3);
-                    }}
-                />
-            )}
-            {activeStep == 3 && (
-                <Schedule
-                    payload={payload}
-                    onBack={() => {
-                        setActiveStep(2);
-                    }}
-                    onSavePayload={async (data) => {
-                        payload = {
-                            ...payload,
-                            ...data,
-                        };
-                        try {
-                            dispatch(updateRegisterLoading(true));
-                            await ramakaRegistration(payload);
-                            dispatch(updateRegisterLoading(false));
-                            setShowRules(true);
-                            setActiveStep(1);
-                            toast({
-                                title: "You have successfully registered!",
-                                status: "success",
-                                isClosable: true,
-                                position: "top",
+    const RegistrationForms = () => {
+        return (
+            <>
+                {activeStep == 1 && (
+                    <RiderInformation
+                        payload={payload}
+                        onSavePayload={(data) => {
+                            setPayload({
+                                ...payload,
+                                ...data,
                             });
-                            setPayload({});
-                        } catch (e) {
-                            dispatch(updateRegisterLoading(false));
-                        }
-                    }}
-                />
+                            setActiveStep(2);
+                        }}
+                    />
+                )}
+                {activeStep == 2 && (
+                    <HorseInformation
+                        payload={payload}
+                        onBack={() => {
+                            setActiveStep(1);
+                        }}
+                        onSavePayload={(data) => {
+                            setPayload({
+                                ...payload,
+                                ...data,
+                            });
+
+                            setActiveStep(3);
+                        }}
+                    />
+                )}
+                {activeStep == 3 && (
+                    <Schedule
+                        payload={payload}
+                        onBack={() => {
+                            setActiveStep(2);
+                        }}
+                        onSavePayload={async (data) => {
+                            payload = {
+                                ...payload,
+                                ...data,
+                            };
+                            try {
+                                dispatch(updateRegisterLoading(true));
+                                await ramakaRegistration(payload);
+                                dispatch(updateRegisterLoading(false));
+                                setShowRules(true);
+                                setActiveStep(1);
+                                toast({
+                                    title: "You have successfully registered!",
+                                    status: "success",
+                                    isClosable: true,
+                                    position: "top",
+                                });
+                                setPayload({});
+                            } catch (e) {
+                                dispatch(updateRegisterLoading(false));
+                            }
+                        }}
+                    />
+                )}
+            </>
+        );
+    };
+
+    return (
+        <VStack>
+            {isMoreThan800 ? (
+                <FormStepper />
+            ) : (
+                <Container marginTop={"16px"}>
+                    <Flex width={"100%"}>
+                        <Text fontWeight={"bold"} color={"teal.300"}>
+                            <WarningIcon marginRight={"8px"} />
+                            {steps[activeStep - 1].title}
+                        </Text>
+                        <Spacer />
+                        <Text color={"teal"} fontWeight={"bold"}>
+                            {steps?.[activeStep]
+                                ? steps?.[activeStep].title
+                                : "Submit"}
+                            <ArrowForwardIcon marginLeft={"8px"} />
+                        </Text>
+                    </Flex>
+                    <Divider marginTop={"16px"} />
+                </Container>
             )}
+
+            <RegistrationForms />
         </VStack>
     );
 };

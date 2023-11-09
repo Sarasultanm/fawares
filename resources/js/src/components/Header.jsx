@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Box,
     Text,
@@ -12,39 +12,66 @@ import {
     VStack,
     Button,
     Menu,
-    MenuButton,
     MenuList,
     MenuItem,
     MenuGroup,
+    MenuButton,
     CircularProgress,
+    IconButton,
+    useMediaQuery,
+    Drawer,
+    DrawerBody,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    DrawerContent,
+    DrawerCloseButton,
+    useDisclosure,
+    Link,
 } from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
 import { useTranslation } from "react-i18next";
 import lightLogo from "../../../images/logo/logo-light.png";
 import darkLogo from "../../../images/logo/logo-dark.png";
 import { useSelector, useDispatch } from "react-redux";
-import { setProfile } from "../reducers/user/userSlice";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { googleLogout } from "@react-oauth/google";
 import { signOut } from "../repository/user";
+import { getProfile } from "../repository/user";
+import { setProfile, updateLoading } from "../reducers/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
     const { t, i18n } = useTranslation();
     const { profile, isFetching } = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    return (
-        <Flex
-            spacing="32px"
-            width={"100%"}
-            padding={"23"}
-            alignItems={"center"}
-        >
-            <Image
-                src={useColorModeValue(darkLogo, lightLogo)}
-                height={"48px"}
-            />
-            <Spacer />
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const btnRef = React.useRef();
+
+    const fetchProfile = async () => {
+        try {
+            dispatch(updateLoading(true));
+            let result = await getProfile();
+            dispatch(setProfile(result));
+            dispatch(updateLoading(false));
+        } catch (e) {
+            dispatch(updateLoading(false));
+        }
+    };
+
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            fetchProfile();
+        }
+    }, []);
+
+    const [isTablet] = useMediaQuery("(min-width: 500px)");
+
+    const LocaleSelector = () => {
+        return (
             <Box>
                 <Select
                     placeholder="Select option"
@@ -57,6 +84,11 @@ export default () => {
                     <option value="ar">Arabic</option>
                 </Select>
             </Box>
+        );
+    };
+
+    const UserProfile = () => {
+        return (
             <Box>
                 {isFetching && !profile && (
                     <CircularProgress
@@ -90,6 +122,13 @@ export default () => {
                         <MenuList>
                             <MenuGroup title={profile?.email}>
                                 <MenuItem
+                                    onClick={async () =>
+                                        navigate("/registration/list")
+                                    }
+                                >
+                                    Registration List
+                                </MenuItem>
+                                <MenuItem
                                     onClick={async () => {
                                         googleLogout();
                                         await signOut();
@@ -105,9 +144,60 @@ export default () => {
                     </Menu>
                 )}
             </Box>
-            <Box>
-                <ColorModeSwitcher justifySelf="flex-end" />
-            </Box>
+        );
+    };
+
+    return (
+        <Flex
+            spacing="32px"
+            width={"100%"}
+            padding={"23"}
+            alignItems={"center"}
+        >
+            <Link href="/">
+                <Image
+                    src={useColorModeValue(darkLogo, lightLogo)}
+                    height={"48px"}
+                />
+            </Link>
+            <Spacer />
+            {isTablet ? (
+                <>
+                    <LocaleSelector />
+                    <UserProfile />
+                    <Box>
+                        <ColorModeSwitcher justifySelf="flex-end" />
+                    </Box>
+                </>
+            ) : (
+                <>
+                    <Box marginRight={"16px"}>
+                        <ColorModeSwitcher justifySelf="flex-end" />
+                    </Box>
+                    <IconButton icon={<HamburgerIcon />} onClick={onOpen} />
+                </>
+            )}
+            <Drawer
+                isOpen={isOpen}
+                placement="right"
+                onClose={onClose}
+                finalFocusRef={btnRef}
+                size={"xs"}
+            >
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader></DrawerHeader>
+
+                    <DrawerBody>
+                        <UserProfile />
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                        <LocaleSelector />
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
         </Flex>
     );
 };

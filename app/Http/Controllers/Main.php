@@ -113,7 +113,7 @@ class Main extends Controller
                     ->orWhere('federation_id', 'like', '%' . $searchKey . '%')
                     ->orWhere('horse_name', 'like', '%' . $searchKey . '%')
                     ->orWhere('horse_registration_number', 'like', '%' . $searchKey . '%');
-            });
+            })->latest()->take(10);
         }
 
         return response([
