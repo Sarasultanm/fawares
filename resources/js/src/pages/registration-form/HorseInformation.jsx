@@ -155,8 +155,7 @@ export default ({ payload, onSavePayload, onBack }) => {
                                 {t("Horse Official Document")}
                             </FormLabel>
                             <Text fontSize={"xs"}>
-                                You can upload or bring the horse official
-                                document during the competition.
+                                {t("Horse Document Instruction")}
                             </Text>
                             <Container marginTop={"16px"} />
                             <FilePicker
