@@ -36,7 +36,7 @@ export default ({ payload, onSavePayload }) => {
                     setTimeout(() => {
                         onSavePayload(values);
                         actions.setSubmitting(false);
-                    }, 1000);
+                    }, 500);
                 }}
             >
                 {(props) => (

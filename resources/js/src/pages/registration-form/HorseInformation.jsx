@@ -65,7 +65,7 @@ export default ({ payload, onSavePayload, onBack }) => {
                             horseDocument,
                         });
                         actions.setSubmitting(false);
-                    }, 1000);
+                    }, 500);
                 }}
             >
                 {(props) => (

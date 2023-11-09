@@ -9,15 +9,29 @@ import {
     useToast,
     Flex,
     Spacer,
+    useColorModeValue,
+    Image,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure,
+    Center,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Card, CardHeader, CardBody, StackDivider } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
+import schedLight from "../../../../images/sched_light.png";
+import schedDark from "../../../../images/sched_dark.png";
 
 export default ({ onBack, payload, onSavePayload }) => {
     const toast = useToast();
     const { t } = useTranslation();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     const { isRegistering } = useSelector((state) => state.user);
 
@@ -77,6 +91,13 @@ export default ({ onBack, payload, onSavePayload }) => {
 
     return (
         <Container marginTop={"40px"}>
+            <Image
+                onClick={onOpen}
+                src={useColorModeValue(schedLight, schedDark)}
+                width={"100%"}
+                borderRadius={"8px"}
+                marginBottom={"30px"}
+            />
             <Card marginBottom={"30px"}>
                 <CardHeader>
                     <Heading size="sm" marginBottom={"16px"}>
@@ -149,6 +170,25 @@ export default ({ onBack, payload, onSavePayload }) => {
                     Submit
                 </Button>
             </Flex>
+            <Modal onClose={onClose} size={"full"} isOpen={isOpen}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Schedules</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <Center>
+                            <Image
+                                onClick={onOpen}
+                                src={useColorModeValue(schedLight, schedDark)}
+                                width={"100%"}
+                            />
+                        </Center>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </Container>
     );
 };
