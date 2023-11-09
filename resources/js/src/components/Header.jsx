@@ -155,10 +155,13 @@ export default () => {
             alignItems={"center"}
         >
             <Link href="/">
-                <Image
+                <Text fontWeight={"bold"} fontSize={"lg"}>
+                    Fawares
+                </Text>
+                {/* <Image
                     src={useColorModeValue(darkLogo, lightLogo)}
                     height={"48px"}
-                />
+                /> */}
             </Link>
             <Spacer />
             {isTablet ? (
