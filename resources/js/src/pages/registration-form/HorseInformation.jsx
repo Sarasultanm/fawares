@@ -182,7 +182,6 @@ export default ({ payload, onSavePayload, onBack }) => {
                             </Button>
                             <Spacer />
                             <Button
-                                mt={4}
                                 colorScheme="teal"
                                 isLoading={props.isSubmitting}
                                 type="submit"
