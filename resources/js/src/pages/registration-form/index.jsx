@@ -71,16 +71,12 @@ export default () => {
     };
 
     if (isFetching && !profile) {
-        return (
-            <Center h="80vh" color="white">
-                Please wait...
-            </Center>
-        );
+        return <Center h="80vh">Please wait...</Center>;
     }
 
     if (!profile) {
         return (
-            <Center h="80vh" color="white">
+            <Center h="80vh">
                 <Container>
                     <Text textAlign={"center"} marginBottom={"32px"}>
                         {t("Google sign in")}
