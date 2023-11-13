@@ -17,6 +17,8 @@ import CanvasJSReact from "@canvasjs/react-charts";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
+// Test bui
+
 export default () => {
     const toast = useToast();
     let [numberOfFederations, setNumberOfFederations] = useState(0);
