@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 
 class Main extends Controller
 {
@@ -62,6 +64,57 @@ class Main extends Controller
         ], 200);
     }
 
+    public function user_registration(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+            'name' => 'required|string',
+        ]);
+
+        User::create([
+            'email' => $request->email,
+            'password' => $request->password,
+            'name' => $request->name,
+            'role' => 'user',
+            'sign_in_method' => 'email',
+            'external_photo' => ""
+        ]);
+
+        return response([
+            "message" => "Registration successful"
+        ], 200);
+    }
+
+    public function user_login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (empty($user)) {
+            return response([
+                'message' => 'Email not found',
+            ], 404);
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return response([
+                'message' => "Password incorrect!",
+            ], 401);
+        }
+
+        $token = $user->createToken('myapptoken')->plainTextToken;
+        $user->token = $token;
+
+        return response([
+            "user" => $user
+        ], 200);
+    }
+
     public function verify_auth(Request $request)
     {
 
@@ -81,9 +134,10 @@ class Main extends Controller
                 $user = User::create([
                     'name' => $payload->name,
                     'email' => $payload->email,
-                    'password' => "google_sign_in",
                     'external_photo' => $payload->picture,
-                    'role' => 'user'
+                    'role' => 'user',
+                    'password' => "google_sign_in",
+                    'sign_in_method' => 'google'
                 ]);
             }
 
@@ -146,11 +200,5 @@ class Main extends Controller
             "number_of_federations_registered" => $number_of_federations_registered,
             "registrations_per_schedule" => $registrations_per_schedule,
         ], 200);
-
-        // number of horses 
-        // number of riders
-
-        // number of riders per schedule
-        // number of horses per schedule
     }
 }

@@ -35,5 +35,7 @@ Route::group(['middleware' => ['auth:sanctum', AdminMiddleware::class], 'prefix'
     Route::get('/dashboard', [Main::class, 'admin_dashboard']);
 });
 
-
+Route::post('/auth/register', [Main::class, 'user_registration']);
+Route::post('/auth/login', [Main::class, 'user_login']);
 Route::post('/auth/verify', [Main::class, 'verify_auth']);
+

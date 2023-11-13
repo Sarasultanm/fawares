@@ -14,19 +14,15 @@ import {
     Center,
     useToast,
     useMediaQuery,
-    HStack,
     Flex,
     Spacer,
     Divider,
-    useColorModeValue,
-    Image,
 } from "@chakra-ui/react";
 import { Box, Text, VStack } from "@chakra-ui/react";
 import RiderInformation from "./RiderInformation";
 import HorseInformation from "./HorseInformation";
 import Schedule from "./Schedule";
 import { useTranslation } from "react-i18next";
-import { GoogleLogin } from "@react-oauth/google";
 import RulesScreen from "./Rules";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -39,15 +35,11 @@ import { verifyGoogleAuth } from "../../repository/user";
 import { ramakaRegistration } from "../../repository/registration";
 import { ArrowForwardIcon, WarningIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-import lightLogo from "../../../../images/logo/logo-light.png";
-import darkLogo from "../../../../images/logo/logo-dark.png";
-
-const APP_NAME = import.meta.env.VITE_APP_NAME;
+import UserRegistration from "./UserRegistration";
 
 export default () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const toast = useToast();
 
     const { profile, isFetching } = useSelector((state) => state.user);
@@ -67,22 +59,6 @@ export default () => {
 
     const [isMoreThan800] = useMediaQuery("(min-width: 800px)");
 
-    const verifyAuth = async (googleData) => {
-        try {
-            dispatch(updateLoading(true));
-            let result = await verifyGoogleAuth(googleData);
-            if (result?.user?.role == "admin") {
-                navigate("/admin");
-                return;
-            }
-            dispatch(setProfile(result.user));
-            dispatch(updateLoading(false));
-        } catch (e) {
-            // TODO: ADD TOAST
-            dispatch(updateLoading(false));
-        }
-    };
-
     if (isFetching && !profile) {
         return (
             <Center h="80vh">
@@ -92,35 +68,7 @@ export default () => {
     }
 
     if (!profile) {
-        return (
-            <Center h="80vh">
-                <Container>
-                    <Center marginBottom={"64px"}>
-                        {APP_NAME == "FAWARES" ? (
-                            <Text fontWeight={"bold"} fontSize={"lg"}>
-                                Fawares Logo
-                            </Text>
-                        ) : (
-                            <Image
-                                src={useColorModeValue(darkLogo, lightLogo)}
-                                height={"100px"}
-                            />
-                        )}
-                    </Center>
-                    <Text textAlign={"center"} marginBottom={"32px"}>
-                        {t("Google sign in")}
-                    </Text>
-                    <Center>
-                        <GoogleLogin
-                            onSuccess={(response) => verifyAuth(response)}
-                            onError={(error) => {
-                                console.log(error);
-                            }}
-                        />
-                    </Center>
-                </Container>
-            </Center>
-        );
+        return <UserRegistration />;
     }
 
     if (showRules) {

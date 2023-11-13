@@ -66,6 +66,83 @@ const signOut = () =>
             });
     });
 
+const signUp = (payload) =>
+    new Promise((resolve, reject) => {
+        let CSRF_token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+
+        var url = `${Constants.baseUrl}/api/auth/register`;
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "X-CSRF-TOKEN": CSRF_token,
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    reject({
+                        message:
+                            "Request failed with status: " + response.status,
+                    });
+                }
+            })
+            .then(function (response) {
+                resolve(response);
+            })
+            .catch(function (error) {
+                console.error(error);
+                reject({
+                    message: "An error occurred.",
+                });
+            });
+    });
+
+const login = (payload) =>
+    new Promise((resolve, reject) => {
+        let CSRF_token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+
+        var url = `${Constants.baseUrl}/api/auth/login`;
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "X-CSRF-TOKEN": CSRF_token,
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    reject({
+                        message:
+                            "Request failed with status: " + response.status,
+                    });
+                }
+            })
+            .then(function (response) {
+                localStorage.setItem("token", response?.user?.token);
+                resolve(response);
+            })
+            .catch(function (error) {
+                console.error(error);
+                reject({
+                    message: "An error occurred.",
+                });
+            });
+    });
+
 const verifyGoogleAuth = (googleData) =>
     new Promise((resolve, reject) => {
         let CSRF_token = document
@@ -108,4 +185,4 @@ const verifyGoogleAuth = (googleData) =>
             });
     });
 
-export { verifyGoogleAuth, getProfile, signOut };
+export { verifyGoogleAuth, getProfile, signOut, signUp, login };
