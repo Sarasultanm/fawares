@@ -18,6 +18,8 @@ import {
     Flex,
     Spacer,
     Divider,
+    useColorModeValue,
+    Image,
 } from "@chakra-ui/react";
 import { Box, Text, VStack } from "@chakra-ui/react";
 import RiderInformation from "./RiderInformation";
@@ -31,11 +33,16 @@ import {
     setProfile,
     updateLoading,
     updateRegisterLoading,
+    updateNoOfRegistrations,
 } from "../../reducers/user/userSlice";
 import { verifyGoogleAuth } from "../../repository/user";
 import { ramakaRegistration } from "../../repository/registration";
 import { ArrowForwardIcon, WarningIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import lightLogo from "../../../../images/logo/logo-light.png";
+import darkLogo from "../../../../images/logo/logo-dark.png";
+
+const APP_NAME = import.meta.env.VITE_APP_NAME;
 
 export default () => {
     const { t } = useTranslation();
@@ -77,13 +84,29 @@ export default () => {
     };
 
     if (isFetching && !profile) {
-        return <Center h="80vh">Please wait...</Center>;
+        return (
+            <Center h="80vh">
+                <Text> Please wait...</Text>
+            </Center>
+        );
     }
 
     if (!profile) {
         return (
             <Center h="80vh">
                 <Container>
+                    <Center marginBottom={"64px"}>
+                        {APP_NAME == "FAWARES" ? (
+                            <Text fontWeight={"bold"} fontSize={"lg"}>
+                                Fawares Logo
+                            </Text>
+                        ) : (
+                            <Image
+                                src={useColorModeValue(darkLogo, lightLogo)}
+                                height={"100px"}
+                            />
+                        )}
+                    </Center>
                     <Text textAlign={"center"} marginBottom={"32px"}>
                         {t("Google sign in")}
                     </Text>
@@ -185,6 +208,7 @@ export default () => {
                                 dispatch(updateRegisterLoading(true));
                                 await ramakaRegistration(payload);
                                 dispatch(updateRegisterLoading(false));
+                                dispatch(updateNoOfRegistrations(1));
                                 setShowRules(true);
                                 setActiveStep(1);
                                 toast({

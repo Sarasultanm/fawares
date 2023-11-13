@@ -26,6 +26,8 @@ import {
     DrawerCloseButton,
     useDisclosure,
     Link,
+    useColorModeValue,
+    Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
@@ -39,6 +41,7 @@ import { signOut } from "../repository/user";
 import { getProfile } from "../repository/user";
 import { setProfile, updateLoading } from "../reducers/user/userSlice";
 import { useNavigate, useLocation } from "react-router-dom";
+const APP_NAME = import.meta.env.VITE_APP_NAME;
 
 export default () => {
     const { t, i18n } = useTranslation();
@@ -59,8 +62,6 @@ export default () => {
 
             if (result?.role == "admin") {
                 if (!location.pathname.includes("/admin")) navigate("/admin");
-            } else {
-                navigate("/");
             }
         } catch (e) {
             dispatch(updateLoading(false));
@@ -162,13 +163,16 @@ export default () => {
             alignItems={"center"}
         >
             <Link href="/">
-                <Text fontWeight={"bold"} fontSize={"lg"}>
-                    Fawares
-                </Text>
-                {/* <Image
-                    src={useColorModeValue(darkLogo, lightLogo)}
-                    height={"48px"}
-                /> */}
+                {APP_NAME == "FAWARES" ? (
+                    <Text fontWeight={"bold"} fontSize={"lg"}>
+                        Fawares
+                    </Text>
+                ) : (
+                    <Image
+                        src={useColorModeValue(darkLogo, lightLogo)}
+                        height={"48px"}
+                    />
+                )}
             </Link>
             <Spacer />
             {isTablet ? (

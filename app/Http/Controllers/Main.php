@@ -115,11 +115,15 @@ class Main extends Controller
                     ->orWhere('federation_id', 'like', '%' . $searchKey . '%')
                     ->orWhere('horse_name', 'like', '%' . $searchKey . '%')
                     ->orWhere('horse_registration_number', 'like', '%' . $searchKey . '%');
-            })->latest();
+            });
+        }
+
+        if (Auth::user()->role != "admin") {
+            $registrationList->where('user_id', Auth::user()->id);
         }
 
         return response([
-            "list" => $registrationList->get()
+            "list" => $registrationList->latest()->get()
         ], 200);
     }
 

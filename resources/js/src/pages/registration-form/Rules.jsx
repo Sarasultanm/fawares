@@ -9,8 +9,10 @@ import {
     StackDivider,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
 
 export default ({ onProceed }) => {
+    const { profile, isFetching } = useSelector((state) => state.user);
     const { t } = useTranslation();
 
     return (
@@ -53,7 +55,9 @@ export default ({ onProceed }) => {
                         </Text>
                     </Box>
                     <Button backgroundColor={"teal"} onClick={onProceed}>
-                        Proceed
+                        {profile?.number_of_registrations > 0
+                            ? "Register Again"
+                            : "Proceed"}
                     </Button>
                 </Stack>
             </CardBody>

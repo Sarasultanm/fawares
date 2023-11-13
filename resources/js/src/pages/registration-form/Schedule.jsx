@@ -20,14 +20,21 @@ import {
     ModalCloseButton,
     useDisclosure,
     Center,
+    Text,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Card, CardHeader, CardBody, StackDivider } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
-import schedLight from "../../../../images/sched_light.png";
-import schedDark from "../../../../images/sched_dark.png";
+
 import moment from "moment";
+const APP_NAME = import.meta.env.VITE_APP_NAME;
+
+import ramakaSchedLight from "../../../../images/ramaka/sched_light.png";
+import ramakaSchedDark from "../../../../images/ramaka/sched_dark.png";
+
+import fawaresSchedLight from "../../../../images/fawares/sched_light.png";
+import fawaresSchedDark from "../../../../images/fawares/sched_dark.png";
 
 export default ({ onBack, payload, onSavePayload }) => {
     const toast = useToast();
@@ -48,53 +55,101 @@ export default ({ onBack, payload, onSavePayload }) => {
         }
     }, [payload?.schedules]);
 
-    let scheduleA = [
-        {
-            id: "1",
-            date: "2023-12-22",
-            age: "4-5",
-            description: "(4-5) الشوط الأول",
-        },
-        {
-            id: "2",
-            date: "2023-12-22",
-            age: "5-6",
-            description: "(5-6) الشوط الثاني",
-        },
-        {
-            id: "3",
-            date: "2023-12-22",
-            age: "6-7",
-            description: "(6-7) الشوط الثالث",
-        },
-    ];
+    let scheduleA =
+        APP_NAME == "RAMAKA"
+            ? [
+                  {
+                      id: "1",
+                      date: "2023-12-22",
+                      age: "4-5",
+                      description: "(4-5) الشوط الأول",
+                  },
+                  {
+                      id: "2",
+                      date: "2023-12-22",
+                      age: "5-6",
+                      description: "(5-6) الشوط الثاني",
+                  },
+                  {
+                      id: "3",
+                      date: "2023-12-22",
+                      age: "6-7",
+                      description: "(6-7) الشوط الثالث",
+                  },
+              ]
+            : [
+                  {
+                      id: "1",
+                      date: "2023-12-22",
+                      age: "4-5",
+                      description: "Extra - Small",
+                  },
+                  {
+                      id: "2",
+                      date: "2023-12-22",
+                      age: "5-6",
+                      description: "Extra 2 - Medium",
+                  },
+                  {
+                      id: "3",
+                      date: "2023-12-22",
+                      age: "6-7",
+                      description: "Extra 3 - Big",
+                  },
+              ];
 
-    let scheduleB = [
-        {
-            id: "4",
-            date: "2023-12-23",
-            age: "4-5",
-            description: "(4-5) الشوط الرابع",
-        },
-        {
-            id: "5",
-            date: "2023-12-23",
-            age: "5-6",
-            description: "(5-6) الشوط الخامس",
-        },
-        {
-            id: "6",
-            date: "2023-12-23",
-            age: "6-7",
-            description: "(6-7) الشوط السادس",
-        },
-    ];
+    let scheduleB =
+        APP_NAME == "RAMAKA"
+            ? [
+                  {
+                      id: "4",
+                      date: "2023-12-23",
+                      age: "4-5",
+                      description: "(4-5) الشوط الرابع",
+                  },
+                  {
+                      id: "5",
+                      date: "2023-12-23",
+                      age: "5-6",
+                      description: "(5-6) الشوط الخامس",
+                  },
+                  {
+                      id: "6",
+                      date: "2023-12-23",
+                      age: "6-7",
+                      description: "(6-7) الشوط السادس",
+                  },
+              ]
+            : [
+                  {
+                      id: "4",
+                      date: "2023-12-23",
+                      age: "4-5",
+                      description: "Extra - Small",
+                  },
+                  {
+                      id: "5",
+                      date: "2023-12-23",
+                      age: "5-6",
+                      description: "Extra 2 - Medium",
+                  },
+                  {
+                      id: "6",
+                      date: "2023-12-23",
+                      age: "6-7",
+                      description: "Extra 3 - Big",
+                  },
+              ];
 
     return (
-        <Container marginTop={"40px"}>
+        <Container marginTop={"40px"} marginBottom={"32px"}>
             <Image
                 onClick={onOpen}
-                src={useColorModeValue(schedLight, schedDark)}
+                src={
+                    APP_NAME == "FAWARES"
+                        ? useColorModeValue(fawaresSchedLight, fawaresSchedDark)
+                        : useColorModeValue(ramakaSchedLight, ramakaSchedDark)
+                }
                 width={"100%"}
                 borderRadius={"8px"}
                 marginBottom={"30px"}
@@ -182,7 +237,17 @@ export default ({ onBack, payload, onSavePayload }) => {
                         <Center>
                             <Image
                                 onClick={onOpen}
-                                src={useColorModeValue(schedLight, schedDark)}
+                                src={
+                                    APP_NAME == "FAWARES"
+                                        ? useColorModeValue(
+                                              fawaresSchedLight,
+                                              fawaresSchedDark
+                                          )
+                                        : useColorModeValue(
+                                              ramakaSchedDark,
+                                              ramakaSchedDark
+                                          )
+                                }
                                 width={"100%"}
                             />
                         </Center>

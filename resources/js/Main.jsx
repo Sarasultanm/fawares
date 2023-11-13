@@ -5,15 +5,19 @@ import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 import "./src/utilities/internalization";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-const GOOGLE_OAUTH_CLIEND_ID = import.meta.env.VITE_GOOGLE_OAUTH_CLIEND_ID;
 import store from "./src/reducers/store";
 import { Provider } from "react-redux";
 import theme from "./src/utilities/theme";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import App from "./src/pages/App";
 import RegistrationList from "./src/pages/admin/RegistrationList";
 import Admin from "./src/pages/admin";
+
+const APP_NAME = import.meta.env.VITE_APP_NAME;
+const VITE_GOOGLE_OAUTH_CLIEND_ID_FAWARES = import.meta.env
+    .VITE_GOOGLE_OAUTH_CLIEND_ID_FAWARES;
+const VITE_GOOGLE_OAUTH_CLIEND_ID_RAMAKA = import.meta.env
+    .VITE_GOOGLE_OAUTH_CLIEND_ID_RAMAKA;
 
 const Main = () => {
     let routes = createBrowserRouter([
@@ -34,7 +38,13 @@ const Main = () => {
     return (
         <ChakraProvider theme={theme}>
             <Provider store={store}>
-                <GoogleOAuthProvider clientId={GOOGLE_OAUTH_CLIEND_ID}>
+                <GoogleOAuthProvider
+                    clientId={
+                        APP_NAME == "FAWARES"
+                            ? VITE_GOOGLE_OAUTH_CLIEND_ID_FAWARES
+                            : VITE_GOOGLE_OAUTH_CLIEND_ID_RAMAKA
+                    }
+                >
                     {/* <StrictMode> */}
                     <ColorModeScript />
                     <RouterProvider router={routes} />

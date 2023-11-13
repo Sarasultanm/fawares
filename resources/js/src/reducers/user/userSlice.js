@@ -17,10 +17,22 @@ export const slice = createSlice({
         updateRegisterLoading: (state, action) => {
             state.isRegistering = action.payload;
         },
+        updateNoOfRegistrations: (state, action) => {
+            state.profile = {
+                ...state.profile,
+                number_of_registrations:
+                    (state.profile?.number_of_registrations || 0) +
+                    action.payload,
+            };
+        },
     },
 });
 
-export const { setProfile, updateLoading, updateRegisterLoading } =
-    slice.actions;
+export const {
+    setProfile,
+    updateLoading,
+    updateRegisterLoading,
+    updateNoOfRegistrations,
+} = slice.actions;
 
 export default slice.reducer;
