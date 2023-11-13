@@ -87,33 +87,59 @@ export default () => {
                 data: schedules.map((e) => e.registrations_count),
                 interval: 1,
                 backgroundColor: "teal",
-                color: "white",
             },
         ],
     };
 
     const options = {
+        indexAxis: "y",
         responsive: true,
-        scales: {
-            x: {
-                ticks: {
-                    precision: 0, // Set the precision to 0 to remove decimals
-                },
-            },
-            y: {
-                beginAtZero: true,
-            },
-        },
         plugins: {
             legend: {
                 position: "top",
+                labels: {
+                    color: "white",
+                    font: {
+                        size: 14,
+                        color: "white",
+                    },
+                },
             },
-            title: {
-                display: true,
-                text: "Registrations by schedule",
+        },
+        scales: {
+            y: {
+                ticks: {
+                    color: "white",
+                    fontSize: 12,
+                },
+            },
+            x: {
+                ticks: {
+                    color: "white",
+                    fontSize: 12,
+                    stepSize: 1,
+                },
             },
         },
     };
+
+    // plugins: {
+    //     legend: {
+    //         position: "top",
+    //         labels: {
+    //             // This more specific font property overrides the global property
+    //             font: {
+    //                 size: 14,
+    //                 color: "white",
+    //             },
+    //         },
+    //     },
+
+    //     title: {
+    //         display: true,
+    //         text: "Registrations by schedule",
+    //     },
+    // },
 
     return isFetching ? (
         <Center height={"80vh"}>
