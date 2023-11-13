@@ -27,7 +27,7 @@ import {
 import { ramakaRegistrationList } from "../../repository/registration";
 import { ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons";
 
-export default () => {
+export default ({ hideHeader }) => {
     const toast = useToast();
     let [list, setList] = useState([]);
     let [isFetching, setFetching] = useState(false);
@@ -61,12 +61,14 @@ export default () => {
     };
 
     useEffect(() => {
-        getList();
+        if (localStorage.getItem("token")) {
+            getList();
+        }
     }, []);
 
     return (
         <>
-            <Header />
+            {!hideHeader && <Header />}
             <VStack padding={"16px 16px"}>
                 <Center marginBottom={"24px"}>
                     <Tooltip

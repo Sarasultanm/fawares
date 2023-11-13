@@ -35,10 +35,12 @@ import {
 import { verifyGoogleAuth } from "../../repository/user";
 import { ramakaRegistration } from "../../repository/registration";
 import { ArrowForwardIcon, WarningIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const toast = useToast();
 
     const { profile, isFetching } = useSelector((state) => state.user);
@@ -62,6 +64,10 @@ export default () => {
         try {
             dispatch(updateLoading(true));
             let result = await verifyGoogleAuth(googleData);
+            if (result?.user?.role == "admin") {
+                navigate("/admin");
+                return;
+            }
             dispatch(setProfile(result.user));
             dispatch(updateLoading(false));
         } catch (e) {

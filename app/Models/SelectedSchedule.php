@@ -18,7 +18,6 @@ class SelectedSchedule extends Model
         return Schedule::where('id', $this->schedule_id)->first();
     }
 
-
     protected $fillable = [
         'registration_id',
         'schedule_id',

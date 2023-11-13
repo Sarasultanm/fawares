@@ -5,8 +5,6 @@ import {
     Flex,
     Select,
     Spacer,
-    Image,
-    useColorModeValue,
     Avatar,
     HStack,
     VStack,
@@ -40,13 +38,14 @@ import { googleLogout } from "@react-oauth/google";
 import { signOut } from "../repository/user";
 import { getProfile } from "../repository/user";
 import { setProfile, updateLoading } from "../reducers/user/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default () => {
     const { t, i18n } = useTranslation();
     const { profile, isFetching } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
@@ -57,6 +56,12 @@ export default () => {
             let result = await getProfile();
             dispatch(setProfile(result));
             dispatch(updateLoading(false));
+
+            if (result?.role == "admin") {
+                if (!location.pathname.includes("/admin")) navigate("/admin");
+            } else {
+                navigate("/");
+            }
         } catch (e) {
             dispatch(updateLoading(false));
         }
@@ -65,6 +70,8 @@ export default () => {
     useEffect(() => {
         if (localStorage.getItem("token")) {
             fetchProfile();
+        } else {
+            navigate("/");
         }
     }, []);
 

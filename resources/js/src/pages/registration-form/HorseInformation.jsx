@@ -91,7 +91,7 @@ export default ({ payload, onSavePayload, onBack }) => {
                                     <FormLabel>{t("Horse Name")}</FormLabel>
                                     <Input
                                         {...field}
-                                        placeholder="Enter horse name"
+                                        placeholder={t("Horse Name")}
                                     />
                                     <FormErrorMessage>
                                         {form.errors.horseName}
@@ -111,7 +111,12 @@ export default ({ payload, onSavePayload, onBack }) => {
                                     <FormLabel>
                                         {t("Pedigree (if available)")}
                                     </FormLabel>
-                                    <Input {...field} placeholder="Pedigree" />
+                                    <Input
+                                        {...field}
+                                        placeholder={t(
+                                            "Pedigree (if available)"
+                                        )}
+                                    />
                                     <FormErrorMessage>
                                         {form.errors.pedigree}
                                     </FormErrorMessage>
@@ -141,7 +146,9 @@ export default ({ payload, onSavePayload, onBack }) => {
                                     </FormLabel>
                                     <Input
                                         {...field}
-                                        placeholder="Horse Registration Number"
+                                        placeholder={t(
+                                            "Horse Registration Number"
+                                        )}
                                     />
                                     <FormErrorMessage>
                                         {form.errors.horseRegistrationNumber}
@@ -150,7 +157,7 @@ export default ({ payload, onSavePayload, onBack }) => {
                             )}
                         </Field>
                         <Container marginTop={"24px"} />
-                        <FormControl isRequired={true}>
+                        <FormControl>
                             <FormLabel>
                                 {t("Horse Official Document")}
                             </FormLabel>

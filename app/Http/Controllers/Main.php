@@ -10,6 +10,7 @@ use App\Services\FileUpload;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Main extends Controller
 {
@@ -81,7 +82,8 @@ class Main extends Controller
                     'name' => $payload->name,
                     'email' => $payload->email,
                     'password' => "google_sign_in",
-                    'external_photo' => $payload->picture
+                    'external_photo' => $payload->picture,
+                    'role' => 'user'
                 ]);
             }
 
@@ -113,37 +115,38 @@ class Main extends Controller
                     ->orWhere('federation_id', 'like', '%' . $searchKey . '%')
                     ->orWhere('horse_name', 'like', '%' . $searchKey . '%')
                     ->orWhere('horse_registration_number', 'like', '%' . $searchKey . '%');
-            })->latest()->take(10);
+            })->latest();
         }
 
         return response([
             "list" => $registrationList->get()
         ], 200);
     }
+
+    public function admin_dashboard()
+    {
+
+        $number_of_horses = Registration::groupBy('horse_registration_number')
+            ->select('horse_registration_number', DB::raw('count(*) as count'))
+            ->get();
+
+        $number_of_federations_registered = Registration::groupBy('federation_id')
+            ->select('federation_id', DB::raw('count(*) as count'))
+            ->get();
+
+        $registrations_per_schedule = Schedule::withCount('registrations')->get();
+
+
+        return response([
+            "number_of_horses" => $number_of_horses,
+            "number_of_federations_registered" => $number_of_federations_registered,
+            "registrations_per_schedule" => $registrations_per_schedule,
+        ], 200);
+
+        // number of horses 
+        // number of riders
+
+        // number of riders per schedule
+        // number of horses per schedule
+    }
 }
-
-
-
-// {
-// 	"data": {
-// 		"iss": "https://accounts.google.com",
-// 		"azp": "935886178153-1rpj4n5mt29nnqthvuphanefimucg3pr.apps.googleusercontent.com",
-// 		"aud": "935886178153-1rpj4n5mt29nnqthvuphanefimucg3pr.apps.googleusercontent.com",
-// 		"sub": "103397957621680338397",
-// 		"hd": "awalalmasar.com",
-// 		"email": "g.dayak@awalalmasar.com",
-// 		"email_verified": "true",
-// 		"nbf": "1699010547",
-// 		"name": "Gerald Dayak",
-// 		"picture": "https://lh3.googleusercontent.com/a/ACg8ocIoDAt4valu5k1BJ3YvD9hdzmkbBvZJqCorOS8kRU_-=s96-c",
-// 		"given_name": "Gerald",
-// 		"family_name": "Dayak",
-// 		"locale": "en",
-// 		"iat": "1699010847",
-// 		"exp": "1699014447",
-// 		"jti": "4964ae4322ed755729d9bee408dfd95b6f04f255",
-// 		"alg": "RS256",
-// 		"kid": "f5f4bf46e52b31d9b6249f7309ad0338400680cd",
-// 		"typ": "JWT"
-// 	}
-// }

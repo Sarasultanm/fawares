@@ -73,4 +73,35 @@ const ramakaRegistrationList = (query) =>
             });
     });
 
-export { ramakaRegistration, ramakaRegistrationList };
+const registrationDashboard = (query) =>
+    new Promise(async (resolve, reject) => {
+        var url = `${Constants.baseUrl}/api/admin/dashboard`;
+
+        fetch(url, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    reject({
+                        message:
+                            "Request failed with status: " + response.status,
+                    });
+                }
+            })
+            .then(function (response) {
+                resolve(response);
+            })
+            .catch(function (error) {
+                console.error(error);
+                reject({
+                    message: "An error occurred.",
+                });
+            });
+    });
+
+export { ramakaRegistration, ramakaRegistrationList, registrationDashboard };

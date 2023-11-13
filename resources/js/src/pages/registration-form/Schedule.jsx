@@ -27,6 +27,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
 import schedLight from "../../../../images/sched_light.png";
 import schedDark from "../../../../images/sched_dark.png";
+import moment from "moment";
 
 export default ({ onBack, payload, onSavePayload }) => {
     const toast = useToast();
@@ -50,19 +51,19 @@ export default ({ onBack, payload, onSavePayload }) => {
     let scheduleA = [
         {
             id: "1",
-            date: "2023-12-16",
+            date: "2023-12-22",
             age: "4-5",
             description: "(4-5) الشوط الأول",
         },
         {
             id: "2",
-            date: "2023-12-16",
+            date: "2023-12-22",
             age: "5-6",
             description: "(5-6) الشوط الثاني",
         },
         {
             id: "3",
-            date: "2023-12-16",
+            date: "2023-12-22",
             age: "6-7",
             description: "(6-7) الشوط الثالث",
         },
@@ -71,19 +72,19 @@ export default ({ onBack, payload, onSavePayload }) => {
     let scheduleB = [
         {
             id: "4",
-            date: "2023-12-17",
+            date: "2023-12-23",
             age: "4-5",
             description: "(4-5) الشوط الرابع",
         },
         {
             id: "5",
-            date: "2023-12-17",
+            date: "2023-12-23",
             age: "5-6",
             description: "(5-6) الشوط الخامس",
         },
         {
             id: "6",
-            date: "2023-12-17",
+            date: "2023-12-23",
             age: "6-7",
             description: "(6-7) الشوط السادس",
         },
@@ -101,7 +102,8 @@ export default ({ onBack, payload, onSavePayload }) => {
             <Card marginBottom={"30px"}>
                 <CardHeader>
                     <Heading size="sm" marginBottom={"16px"}>
-                        First Day *DATE HERE*
+                        First Day{" "}
+                        {moment(scheduleA[0].date).format("MMMM DD, YYYY")}
                     </Heading>
                     <RadioGroup
                         value={selectedScheduleA}
@@ -121,7 +123,8 @@ export default ({ onBack, payload, onSavePayload }) => {
             <Card marginBottom={"30px"}>
                 <CardHeader>
                     <Heading size="sm" marginBottom={"16px"}>
-                        Second Day *DATE HERE*
+                        Second Day{" "}
+                        {moment(scheduleB[0].date).format("MMMM DD, YYYY")}
                     </Heading>
                     <RadioGroup
                         value={selectedScheduleB}

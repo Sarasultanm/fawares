@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Main;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/register', [Main::class, 'register']);
     Route::get('/auth/sign-out', [Main::class, 'sign_out']);
     Route::get('/registration/list', [Main::class, 'list_registration']);
+});
+
+
+Route::group(['middleware' => ['auth:sanctum', AdminMiddleware::class], 'prefix' => 'admin'], function () {
+    Route::get('/dashboard', [Main::class, 'admin_dashboard']);
 });
 
 

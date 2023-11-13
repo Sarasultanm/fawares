@@ -13,6 +13,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./src/pages/App";
 import RegistrationList from "./src/pages/admin/RegistrationList";
+import Admin from "./src/pages/admin";
 
 const Main = () => {
     let routes = createBrowserRouter([
@@ -23,6 +24,10 @@ const Main = () => {
         {
             path: "/registration/list",
             element: <RegistrationList />,
+        },
+        {
+            path: "/admin",
+            element: <Admin />,
         },
     ]);
 

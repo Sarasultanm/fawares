@@ -62,7 +62,7 @@ export default ({ payload, onSavePayload }) => {
                                     <FormLabel>{t("Rider name")}</FormLabel>
                                     <Input
                                         {...field}
-                                        placeholder="Enter full name"
+                                        placeholder={t("Rider name")}
                                     />
                                     <FormErrorMessage>
                                         {form.errors.riderName}
@@ -97,7 +97,7 @@ export default ({ payload, onSavePayload }) => {
                                     <Input
                                         {...field}
                                         type="number"
-                                        placeholder="Federation ID Number"
+                                        placeholder={t("Rider age")}
                                     />
                                     <FormErrorMessage>
                                         {form.errors.riderAge}
@@ -128,7 +128,7 @@ export default ({ payload, onSavePayload }) => {
                                     </FormLabel>
                                     <Input
                                         {...field}
-                                        placeholder="Federation ID Number"
+                                        placeholder={t("Federation ID Number")}
                                     />
                                     <FormErrorMessage>
                                         {form.errors.federationId}
