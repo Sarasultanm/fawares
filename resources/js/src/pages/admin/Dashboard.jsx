@@ -13,11 +13,17 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import { registrationDashboard } from "../../repository/registration";
-// import CanvasJSReact from "@canvasjs/react-charts";
 
-// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
-// Test bui
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 export default () => {
     const toast = useToast();
@@ -25,6 +31,15 @@ export default () => {
     let [numberOfHorses, setNumberOfHorses] = useState(0);
     let [schedules, setSchedules] = useState([]);
     let [isFetching, setFetching] = useState(false);
+
+    ChartJS.register(
+        CategoryScale,
+        LinearScale,
+        BarElement,
+        Title,
+        Tooltip,
+        Legend
+    );
 
     const getData = () => {
         let promise = new Promise(async (resolve, reject) => {
@@ -64,46 +79,41 @@ export default () => {
         getData();
     }, []);
 
-    // let options = {
-    //     backgroundColor: "transparent",
-    //     animationEnabled: true,
-    //     theme: useColorModeValue("light2", "dark2"),
-    //     axisX: {
-    //         // title: "Social Network",
-    //         titleFontSize: 12,
-    //         reversed: true,
-    //     },
-    //     axisY: {
-    //         // title: "Monthly Active Users",
-    //         includeZero: true,
-    //         interval: 1,
-    //         // labelFormatter: (e) => {
-    //         //     var suffixes = ["", "K", "M", "B"];
-    //         //     var order = Math.max(
-    //         //         Math.floor(Math.log(Math.abs(e.value)) / Math.log(1000)),
-    //         //         0
-    //         //     );
-    //         //     if (order > suffixes.length - 1) order = suffixes.length - 1;
-    //         //     var suffix = suffixes[order];
-    //         //     return (
-    //         //         CanvasJS.formatNumber(e.value / Math.pow(1000, order)) +
-    //         //         suffix
-    //         //     );
-    //         // },
-    //     },
-    //     data: [
-    //         {
-    //             type: "bar",
-    //             dataPoints: schedules.map((e) => {
-    //                 console.log(e?.registration_count);
-    //                 return {
-    //                     y: e?.registrations_count,
-    //                     label: `${e?.date} | ${e?.description}`,
-    //                 };
-    //             }),
-    //         },
-    //     ],
-    // };
+    const data = {
+        labels: schedules.map((e) => `${e?.date} | ${e?.description}`),
+        datasets: [
+            {
+                label: "Registrations",
+                data: schedules.map((e) => e.registrations_count),
+                interval: 1,
+                backgroundColor: "teal",
+                color: "white",
+            },
+        ],
+    };
+
+    const options = {
+        responsive: true,
+        scales: {
+            x: {
+                ticks: {
+                    precision: 0, // Set the precision to 0 to remove decimals
+                },
+            },
+            y: {
+                beginAtZero: true,
+            },
+        },
+        plugins: {
+            legend: {
+                position: "top",
+            },
+            title: {
+                display: true,
+                text: "Registrations by schedule",
+            },
+        },
+    };
 
     return isFetching ? (
         <Center height={"80vh"}>
@@ -128,7 +138,7 @@ export default () => {
 
                     <Stat>
                         <StatLabel fontWeight={"bold"} fontSize={"md"}>
-                            Number of Federations Registered
+                            Number of Riders Registered
                         </StatLabel>
                         <StatNumber>{numberOfFederations}</StatNumber>
                     </Stat>
@@ -138,8 +148,8 @@ export default () => {
             <Card padding={"16px"}>
                 <Text fontWeight={"bold"} marginBottom={"16px"} fontSize={"md"}>
                     Registrations per Schedule
+                    <Bar options={options} data={data} />
                 </Text>
-                {/* <CanvasJSChart options={options} /> */}
             </Card>
         </>
     );
