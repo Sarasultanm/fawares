@@ -40,43 +40,59 @@ export default () => {
                     result?.number_of_federations_registered?.length
                 );
                 setSchedules(result?.registrations_per_schedule || []);
+                // var chart = new CanvasJS.Chart("chartContainer", {
+                //     backgroundColor: "transparent",
+                //     animationEnabled: true,
+                //     theme: useColorModeValue("light2", "dark2"),
+                //     axisX: {
+                //         // title: "Social Network",
+                //         titleFontSize: 12,
+                //         reversed: true,
+                //     },
+                //     axisY: {
+                //         // title: "Monthly Active Users",
+                //         includeZero: true,
+                //         interval: 1,
+                //         labelFormatter: (e) => {
+                //             var suffixes = ["", "K", "M", "B"];
+                //             var order = Math.max(
+                //                 Math.floor(
+                //                     Math.log(Math.abs(e.value)) / Math.log(1000)
+                //                 ),
+                //                 0
+                //             );
+                //             if (order > suffixes.length - 1)
+                //                 order = suffixes.length - 1;
+                //             var suffix = suffixes[order];
+                //             return (
+                //                 CanvasJS.formatNumber(
+                //                     e.value / Math.pow(1000, order)
+                //                 ) + suffix
+                //             );
+                //         },
+                //     },
+                //     data: [
+                //         {
+                //             type: "bar",
+                //             dataPoints: schedules.map((e) => {
+                //                 console.log(e?.registration_count);
+                //                 return {
+                //                     y: e?.registrations_count,
+                //                     label: `${e?.date} | ${e?.description}`,
+                //                 };
+                //             }),
+                //         },
+                //     ],
+                // });
                 setFetching(false);
                 resolve("Success");
 
                 var chart = new CanvasJS.Chart("chartContainer", {
                     backgroundColor: "transparent",
                     animationEnabled: true,
-                    theme: useColorModeValue("light2", "dark2"),
-                    axisX: {
-                        // title: "Social Network",
-                        titleFontSize: 12,
-                        reversed: true,
-                    },
-                    axisY: {
-                        // title: "Monthly Active Users",
-                        includeZero: true,
-                        interval: 1,
-                        labelFormatter: (e) => {
-                            var suffixes = ["", "K", "M", "B"];
-                            var order = Math.max(
-                                Math.floor(
-                                    Math.log(Math.abs(e.value)) / Math.log(1000)
-                                ),
-                                0
-                            );
-                            if (order > suffixes.length - 1)
-                                order = suffixes.length - 1;
-                            var suffix = suffixes[order];
-                            return (
-                                CanvasJS.formatNumber(
-                                    e.value / Math.pow(1000, order)
-                                ) + suffix
-                            );
-                        },
-                    },
                     data: [
                         {
-                            type: "bar",
+                            type: "column",
                             dataPoints: schedules.map((e) => {
                                 console.log(e?.registration_count);
                                 return {
