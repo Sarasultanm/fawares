@@ -13,11 +13,9 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import { registrationDashboard } from "../../repository/registration";
-// import CanvasJSReact from "@canvasjs/react-charts";
-// var CanvasJS = CanvasJSReact.CanvasJS;
-// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import CanvasJSReact from "@canvasjs/react-charts";
 
-import CanvasJS from "@canvasjs/charts";
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default () => {
     const toast = useToast();
@@ -40,70 +38,9 @@ export default () => {
                     result?.number_of_federations_registered?.length
                 );
                 setSchedules(result?.registrations_per_schedule || []);
-                // var chart = new CanvasJS.Chart("chartContainer", {
-                //     backgroundColor: "transparent",
-                //     animationEnabled: true,
-                //     theme: useColorModeValue("light2", "dark2"),
-                //     axisX: {
-                //         // title: "Social Network",
-                //         titleFontSize: 12,
-                //         reversed: true,
-                //     },
-                //     axisY: {
-                //         // title: "Monthly Active Users",
-                //         includeZero: true,
-                //         interval: 1,
-                //         labelFormatter: (e) => {
-                //             var suffixes = ["", "K", "M", "B"];
-                //             var order = Math.max(
-                //                 Math.floor(
-                //                     Math.log(Math.abs(e.value)) / Math.log(1000)
-                //                 ),
-                //                 0
-                //             );
-                //             if (order > suffixes.length - 1)
-                //                 order = suffixes.length - 1;
-                //             var suffix = suffixes[order];
-                //             return (
-                //                 CanvasJS.formatNumber(
-                //                     e.value / Math.pow(1000, order)
-                //                 ) + suffix
-                //             );
-                //         },
-                //     },
-                //     data: [
-                //         {
-                //             type: "bar",
-                //             dataPoints: schedules.map((e) => {
-                //                 console.log(e?.registration_count);
-                //                 return {
-                //                     y: e?.registrations_count,
-                //                     label: `${e?.date} | ${e?.description}`,
-                //                 };
-                //             }),
-                //         },
-                //     ],
-                // });
+
                 setFetching(false);
                 resolve("Success");
-
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    backgroundColor: "transparent",
-                    animationEnabled: true,
-                    data: [
-                        {
-                            type: "column",
-                            dataPoints: schedules.map((e) => {
-                                console.log(e?.registration_count);
-                                return {
-                                    y: e?.registrations_count,
-                                    label: `${e?.date} | ${e?.description}`,
-                                };
-                            }),
-                        },
-                    ],
-                });
-                chart.render();
             } catch (e) {
                 setFetching(false);
                 reject(e?.message);
@@ -125,9 +62,51 @@ export default () => {
         getData();
     }, []);
 
+    let options = {
+        backgroundColor: "transparent",
+        animationEnabled: true,
+        theme: useColorModeValue("light2", "dark2"),
+        axisX: {
+            // title: "Social Network",
+            titleFontSize: 12,
+            reversed: true,
+        },
+        axisY: {
+            // title: "Monthly Active Users",
+            includeZero: true,
+            interval: 1,
+            // labelFormatter: (e) => {
+            //     var suffixes = ["", "K", "M", "B"];
+            //     var order = Math.max(
+            //         Math.floor(Math.log(Math.abs(e.value)) / Math.log(1000)),
+            //         0
+            //     );
+            //     if (order > suffixes.length - 1) order = suffixes.length - 1;
+            //     var suffix = suffixes[order];
+            //     return (
+            //         CanvasJS.formatNumber(e.value / Math.pow(1000, order)) +
+            //         suffix
+            //     );
+            // },
+        },
+        data: [
+            {
+                type: "bar",
+                dataPoints: schedules.map((e) => {
+                    console.log(e?.registration_count);
+                    return {
+                        y: e?.registrations_count,
+                        label: `${e?.date} | ${e?.description}`,
+                    };
+                }),
+            },
+        ],
+    };
+
     return isFetching ? (
         <Center height={"80vh"}>
             <Text>Please wait...</Text>
+            <div id="chartContainer" />
         </Center>
     ) : (
         <>
@@ -158,8 +137,7 @@ export default () => {
                 <Text fontWeight={"bold"} marginBottom={"16px"} fontSize={"md"}>
                     Registrations per Schedule
                 </Text>
-                <div id="chartContainer"></div>
-                {/* <CanvasJSChart options={options} /> */}
+                <CanvasJSChart options={options} />
             </Card>
         </>
     );
