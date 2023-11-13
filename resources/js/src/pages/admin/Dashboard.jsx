@@ -40,6 +40,9 @@ export default () => {
                     result?.number_of_federations_registered?.length
                 );
                 setSchedules(result?.registrations_per_schedule || []);
+                setFetching(false);
+                resolve("Success");
+
                 var chart = new CanvasJS.Chart("chartContainer", {
                     backgroundColor: "transparent",
                     animationEnabled: true,
@@ -85,9 +88,6 @@ export default () => {
                     ],
                 });
                 chart.render();
-
-                setFetching(false);
-                resolve("Success");
             } catch (e) {
                 setFetching(false);
                 reject(e?.message);
