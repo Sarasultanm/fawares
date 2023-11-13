@@ -6,6 +6,7 @@
         "build": "vite build"
     },
     "dependencies": {
+        "@canvasjs/charts": "^3.7.26",
         "@canvasjs/react-charts": "^1.0.0",
         "@chakra-ui/icons": "^2.1.1",
         "@chakra-ui/react": "^2.8.1",
