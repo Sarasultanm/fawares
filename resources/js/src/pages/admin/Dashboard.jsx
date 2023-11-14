@@ -42,6 +42,8 @@ export default () => {
     );
 
     const getData = () => {
+        if (localStorage.getItem("token")) return;
+
         let promise = new Promise(async (resolve, reject) => {
             try {
                 setFetching(true);
@@ -122,24 +124,6 @@ export default () => {
             },
         },
     };
-
-    // plugins: {
-    //     legend: {
-    //         position: "top",
-    //         labels: {
-    //             // This more specific font property overrides the global property
-    //             font: {
-    //                 size: 14,
-    //                 color: "white",
-    //             },
-    //         },
-    //     },
-
-    //     title: {
-    //         display: true,
-    //         text: "Registrations by schedule",
-    //     },
-    // },
 
     return isFetching ? (
         <Center height={"80vh"}>

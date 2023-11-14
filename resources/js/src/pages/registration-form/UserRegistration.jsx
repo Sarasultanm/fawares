@@ -4,13 +4,7 @@ import {
     Center,
     useColorModeValue,
     Image,
-    Text,
     Card,
-    Button,
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    Input,
     Box,
     Divider,
     AbsoluteCenter,
@@ -22,14 +16,17 @@ import {
     TabIndicator,
 } from "@chakra-ui/react";
 import { GoogleLogin } from "@react-oauth/google";
-import lightLogo from "../../../../images/logo/logo-light.png";
-import darkLogo from "../../../../images/logo/logo-dark.png";
 import { useTranslation } from "react-i18next";
 import SignUp from "./registration-form/SignUp";
 import LogIn from "./registration-form/LogIn";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfile, updateLoading } from "../../reducers/user/userSlice";
 import { verifyGoogleAuth } from "../../repository/user";
+
+import ramakaLightLogo from "../../../../images/ramaka/logo/logo-light.png";
+import ramakaDarkLogo from "../../../../images/ramaka/logo/logo-dark.png";
+import fawaresLightLogo from "../../../../images/fawares/logo/logo-light.png";
+import fawaresDarkLogo from "../../../../images/fawares/logo/logo-dark.png";
 
 const APP_NAME = import.meta.env.VITE_APP_NAME;
 
@@ -55,19 +52,23 @@ export default () => {
 
     return (
         <Container>
-            <Card mt={"10%"} mb={"40px"} padding={"32px"}>
+            <Card mt={"10%"} padding={"32px"} mb={"24px"}>
                 <Container>
                     <Center marginBottom={"64px"}>
-                        {APP_NAME == "FAWARES" ? (
-                            <Text fontWeight={"bold"} fontSize={"lg"}>
-                                Fawares Logo
-                            </Text>
-                        ) : (
-                            <Image
-                                src={useColorModeValue(darkLogo, lightLogo)}
-                                height={"100px"}
-                            />
-                        )}
+                        <Image
+                            src={
+                                APP_NAME == "FAWARES"
+                                    ? useColorModeValue(
+                                          fawaresDarkLogo,
+                                          fawaresLightLogo
+                                      )
+                                    : useColorModeValue(
+                                          ramakaDarkLogo,
+                                          ramakaLightLogo
+                                      )
+                            }
+                            height={"150px"}
+                        />
                     </Center>
                     <Tabs isFitted variant="unstyledunstyled">
                         <TabList>
@@ -75,7 +76,6 @@ export default () => {
                             <Tab>Sign Up</Tab>
                         </TabList>
                         <TabIndicator
-                            mt="-1.5px"
                             height="2px"
                             bg="blue.500"
                             borderRadius="1px"

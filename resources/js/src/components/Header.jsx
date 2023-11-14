@@ -32,8 +32,6 @@ import {
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { ColorModeSwitcher } from "../components/ColorModeSwitcher";
 import { useTranslation } from "react-i18next";
-import lightLogo from "../../../images/logo/logo-light.png";
-import darkLogo from "../../../images/logo/logo-dark.png";
 import { useSelector, useDispatch } from "react-redux";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { googleLogout } from "@react-oauth/google";
@@ -41,6 +39,10 @@ import { signOut } from "../repository/user";
 import { getProfile } from "../repository/user";
 import { setProfile, updateLoading } from "../reducers/user/userSlice";
 import { useNavigate, useLocation } from "react-router-dom";
+import ramakaLightLogo from "../../../images/ramaka/logo/logo-light.png";
+import ramakaDarkLogo from "../../../images/ramaka/logo/logo-dark.png";
+import fawaresLightLogo from "../../../images/fawares/logo/logo-light.png";
+import fawaresDarkLogo from "../../../images/fawares/logo/logo-dark.png";
 const APP_NAME = import.meta.env.VITE_APP_NAME;
 
 export default () => {
@@ -164,12 +166,16 @@ export default () => {
         >
             <Link href="/">
                 {APP_NAME == "FAWARES" ? (
-                    <Text fontWeight={"bold"} fontSize={"lg"}>
-                        Fawares
-                    </Text>
+                    <Image
+                        src={useColorModeValue(
+                            fawaresDarkLogo,
+                            fawaresLightLogo
+                        )}
+                        height={"48px"}
+                    />
                 ) : (
                     <Image
-                        src={useColorModeValue(darkLogo, lightLogo)}
+                        src={useColorModeValue(ramakaDarkLogo, ramakaLightLogo)}
                         height={"48px"}
                     />
                 )}
