@@ -22,6 +22,7 @@ import LogIn from "./registration-form/LogIn";
 import { useSelector, useDispatch } from "react-redux";
 import { setProfile, updateLoading } from "../../reducers/user/userSlice";
 import { verifyGoogleAuth } from "../../repository/user";
+import { useNavigate } from "react-router-dom";
 
 import ramakaLightLogo from "../../../../images/ramaka/logo/logo-light.png";
 import ramakaDarkLogo from "../../../../images/ramaka/logo/logo-dark.png";
@@ -32,18 +33,19 @@ const APP_NAME = import.meta.env.VITE_APP_NAME;
 
 export default () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const verifyAuth = async (googleData) => {
         try {
             dispatch(updateLoading(true));
             let result = await verifyGoogleAuth(googleData);
+            dispatch(setProfile(result.user));
+            dispatch(updateLoading(false));
             if (result?.user?.role == "admin") {
                 navigate("/admin");
                 return;
             }
-            dispatch(setProfile(result.user));
-            dispatch(updateLoading(false));
         } catch (e) {
             // TODO: ADD TOAST
             dispatch(updateLoading(false));

@@ -34,7 +34,6 @@ import {
 import { verifyGoogleAuth } from "../../repository/user";
 import { ramakaRegistration } from "../../repository/registration";
 import { ArrowForwardIcon, WarningIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
 import UserRegistration from "./UserRegistration";
 
 export default () => {

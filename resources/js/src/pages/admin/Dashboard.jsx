@@ -42,7 +42,7 @@ export default () => {
     );
 
     const getData = () => {
-        if (localStorage.getItem("token")) return;
+        if (!localStorage.getItem("token")) return;
 
         let promise = new Promise(async (resolve, reject) => {
             try {

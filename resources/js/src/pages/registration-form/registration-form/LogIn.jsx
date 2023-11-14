@@ -14,8 +14,10 @@ import { Field, Form, Formik } from "formik";
 import { login } from "../../../repository/user";
 import { setProfile } from "../../../reducers/user/userSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const toast = useToast();
 
