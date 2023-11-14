@@ -39,6 +39,27 @@ const resources = {
                 "Please log in with your Google account to proceed to the registration.",
             "Horse Document Instruction":
                 "You can upload or bring the horse official document during the competition.",
+            ////
+            Login: "Login",
+            "Sign Up": "Sign Up",
+            "Email is required": "Email is required",
+            "Password is required": "Password is required",
+            Password: "Password",
+            Schedules: "Schedules",
+            Close: "Close",
+            "Password and confirm password does not match.":
+                "Password and confirm password does not match.",
+            "You have successfully registered! You may now proceed to login.":
+                "You have successfully registered! You may now proceed to login.",
+            "An error occurred. Please try again.":
+                "An error occurred. Please try again.",
+            "Full name is required": "Full name is required",
+            "Email is required": "Email is required",
+            Email: "Email",
+            Password: "Password",
+            "Password is required": "Password is required",
+            "Confirm password is required": "Confirm password is required",
+            "Confirm Password": "Confirm Password",
         },
     },
     ar: {

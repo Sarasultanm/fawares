@@ -180,7 +180,7 @@ export default () => {
                                                 ? "text"
                                                 : "password"
                                         }
-                                        placeholder="Confirm Passwor"
+                                        placeholder="Confirm Password"
                                     />
                                     <InputRightElement width="4.5rem">
                                         <Button
