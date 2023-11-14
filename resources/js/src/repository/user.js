@@ -83,14 +83,11 @@ const signUp = (payload) =>
             },
             body: JSON.stringify(payload),
         })
-            .then(function (response) {
+            .then(async function (response) {
                 if (response.ok) {
                     return response.json();
                 } else {
-                    reject({
-                        message:
-                            "Request failed with status: " + response.status,
-                    });
+                    reject(await response.json());
                 }
             })
             .then(function (response) {

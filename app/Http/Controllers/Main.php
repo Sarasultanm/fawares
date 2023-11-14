@@ -72,6 +72,14 @@ class Main extends Controller
             'name' => 'required|string',
         ]);
 
+        $user = User::where('email', $request->email)->first();
+
+        if (!empty($user)) {
+            return response([
+                "message" => "Email has already been taken (لقد اخذ الايميل من قبل)"
+            ], 403);
+        }
+
         User::create([
             'email' => $request->email,
             'password' => $request->password,

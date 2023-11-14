@@ -43,6 +43,7 @@ export default () => {
                 }
                 try {
                     await signUp(values);
+                    actions.resetForm();
                     toast({
                         title: "You have successfully registered! You may now proceed to login.",
                         status: "success",
@@ -51,7 +52,9 @@ export default () => {
                     });
                 } catch (e) {
                     toast({
-                        title: "An error occurred. Please try again.",
+                        title:
+                            e?.message ||
+                            "An error occurred. Please try again.",
                         status: "error",
                         isClosable: true,
                         position: "top",
