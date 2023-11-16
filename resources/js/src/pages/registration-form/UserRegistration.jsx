@@ -74,8 +74,8 @@ export default () => {
                     </Center>
                     <Tabs isFitted variant="unstyledunstyled">
                         <TabList>
-                            <Tab>Login</Tab>
-                            <Tab>Sign Up</Tab>
+                            <Tab>{t("Login")}</Tab>
+                            <Tab>{t("Sign Up")}</Tab>
                         </TabList>
                         <TabIndicator
                             height="2px"
@@ -98,7 +98,7 @@ export default () => {
                             px="10px"
                             backgroundColor={"transparent"}
                         >
-                            Or
+                            {t("Or")}
                         </AbsoluteCenter>
                     </Box>
                     <Center>

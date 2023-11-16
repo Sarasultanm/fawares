@@ -75,7 +75,7 @@ export default ({ payload, onSavePayload, onBack }) => {
                             name="horseName"
                             validate={(value) => {
                                 if (!value) {
-                                    return "Horse name is required";
+                                    return `${t("Horse name is required")}`;
                                 }
                                 return null;
                             }}
@@ -128,7 +128,7 @@ export default ({ payload, onSavePayload, onBack }) => {
                             name="horseRegistrationNumber"
                             validate={(value) => {
                                 if (!value) {
-                                    return "Horse registration number is required";
+                                    return `${t("Horse registration number is required")}`;
                                 }
                                 return null;
                             }}

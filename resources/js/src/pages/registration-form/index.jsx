@@ -61,7 +61,7 @@ export default () => {
     if (isFetching && !profile) {
         return (
             <Center h="80vh">
-                <Text> Please wait...</Text>
+                <Text> {t("Please Wait")}</Text>
             </Center>
         );
     }
@@ -159,7 +159,7 @@ export default () => {
                                 setShowRules(true);
                                 setActiveStep(1);
                                 toast({
-                                    title: "You have successfully registered!",
+                                    title: `${t("You have successfully registered!")}`,
                                     status: "success",
                                     isClosable: true,
                                     position: "top",
@@ -190,7 +190,7 @@ export default () => {
                         <Text color={"teal"} fontWeight={"bold"}>
                             {steps?.[activeStep]
                                 ? steps?.[activeStep].title
-                                : "Submit"}
+                                : `${t("Submit")}`}
                             <ArrowForwardIcon marginLeft={"8px"} />
                         </Text>
                     </Flex>

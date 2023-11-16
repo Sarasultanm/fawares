@@ -15,11 +15,12 @@ import { login } from "../../../repository/user";
 import { setProfile } from "../../../reducers/user/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 export default () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const toast = useToast();
+    const { t } = useTranslation();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -44,7 +45,7 @@ export default () => {
                 } catch (e) {
                     console.log(e);
                     toast({
-                        title: "An error occurred. Please try again.",
+                        title: `${t("An error occurred. Please try again.")}`,
                         status: "error",
                         isClosable: true,
                         position: "top",
@@ -60,7 +61,7 @@ export default () => {
                         name="email"
                         validate={(value) => {
                             if (!value) {
-                                return "Email is required";
+                                return `${t("Email is required")}`;
                             }
                             return null;
                         }}
@@ -71,8 +72,8 @@ export default () => {
                                     form.errors.email && form.touched.email
                                 }
                             >
-                                <FormLabel>Email</FormLabel>
-                                <Input {...field} placeholder="Email" />
+                                <FormLabel>{t("Email")}</FormLabel>
+                                <Input {...field} placeholder={t("Email")} />
                                 <FormErrorMessage>
                                     {form.errors.email}
                                 </FormErrorMessage>
@@ -84,7 +85,7 @@ export default () => {
                         name="password"
                         validate={(value) => {
                             if (!value) {
-                                return "Password is required";
+                                return `${t("Password is required")}`;
                             }
                             return null;
                         }}
@@ -96,14 +97,14 @@ export default () => {
                                     form.touched.password
                                 }
                             >
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel>{t("Password")}</FormLabel>
                                 <InputGroup size="md">
                                     <Input
                                         {...field}
                                         type={
                                             showPassword ? "text" : "password"
                                         }
-                                        placeholder="Password"
+                                        placeholder={t("Password")}
                                     />
                                     <InputRightElement width="4.5rem">
                                         <Button
@@ -113,7 +114,7 @@ export default () => {
                                                 setShowPassword(!showPassword)
                                             }
                                         >
-                                            {showPassword ? "Hide" : "Show"}
+                                            {showPassword ? `${t("Hide")}` : `${t("Show")}`}
                                         </Button>
                                     </InputRightElement>
                                 </InputGroup>
@@ -130,7 +131,7 @@ export default () => {
                         isLoading={props.isSubmitting}
                         type="submit"
                     >
-                        Submit
+                        {t("Submit")}
                     </Button>
                 </Form>
             )}

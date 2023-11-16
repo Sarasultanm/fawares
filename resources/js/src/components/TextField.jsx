@@ -6,8 +6,10 @@ import {
   FormHelperText,
   Input,
 } from '@chakra-ui/react';
+import { useTranslation } from "react-i18next";
 
 export default ({  }) => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
 
   const handleInputChange = e => setInput(e.target.value);
@@ -16,14 +18,14 @@ export default ({  }) => {
 
   return (
     <FormControl isInvalid={isError}>
-      <FormLabel>Email</FormLabel>
+      <FormLabel>{t("Email")}</FormLabel>
       <Input type="email" value={input} onChange={handleInputChange} />
       {!isError ? (
         <FormHelperText>
-          Enter the email you'd like to receive the newsletter on.
+          {t("Enter the email you'd like to receive the newsletter on.")}
         </FormHelperText>
       ) : (
-        <FormErrorMessage>Email is required.</FormErrorMessage>
+        <FormErrorMessage>{t("Email is required")}</FormErrorMessage>
       )}
     </FormControl>
   );

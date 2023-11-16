@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Field, Form, Formik } from "formik";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next"; 
 
 export default ({ payload, onSavePayload }) => {
     const { t } = useTranslation();
@@ -46,7 +46,7 @@ export default ({ payload, onSavePayload }) => {
                             name="riderName"
                             validate={(value) => {
                                 if (!value) {
-                                    return "Rider name is required";
+                                    return `${t("Rider name is required")}`;
                                 }
                                 return null;
                             }}
@@ -75,12 +75,12 @@ export default ({ payload, onSavePayload }) => {
                             name="riderAge"
                             validate={(value) => {
                                 if (!value) {
-                                    return "Rider age is required";
+                                    return `${t("Rider age is required")}`;
                                 }
 
                                 var regex = /^[0-9]+$/;
                                 if (!regex.test(value)) {
-                                    return "Age must be a number";
+                                    return `${t("Age must be a number")}`;
                                 }
                                 return null;
                             }}
@@ -110,7 +110,7 @@ export default ({ payload, onSavePayload }) => {
                             name="federationId"
                             validate={(value) => {
                                 if (!value) {
-                                    return "Federation ID Number is required";
+                                    return `${("Federation ID Number is required")}`;
                                 }
                                 return null;
                             }}

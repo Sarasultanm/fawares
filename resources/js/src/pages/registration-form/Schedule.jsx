@@ -157,7 +157,7 @@ export default ({ onBack, payload, onSavePayload }) => {
             <Card marginBottom={"30px"}>
                 <CardHeader>
                     <Heading size="sm" marginBottom={"16px"}>
-                        First Day{" "}
+                        {t("First Day")}{" "}
                         {moment(scheduleA[0].date).format("MMMM DD, YYYY")}
                     </Heading>
                     <RadioGroup
@@ -178,7 +178,7 @@ export default ({ onBack, payload, onSavePayload }) => {
             <Card marginBottom={"30px"}>
                 <CardHeader>
                     <Heading size="sm" marginBottom={"16px"}>
-                        Second Day{" "}
+                        {t("Second Day")}{" "}
                         {moment(scheduleB[0].date).format("MMMM DD, YYYY")}
                     </Heading>
                     <RadioGroup
@@ -212,7 +212,7 @@ export default ({ onBack, payload, onSavePayload }) => {
                     onClick={() => {
                         if (!selectedScheduleA || !selectedScheduleB) {
                             toast({
-                                title: "Please select schedule for second and first day.",
+                                title: `${t("Please select schedule for second and first day.")}`,
                                 status: "error",
                                 isClosable: true,
                                 position: "top",
@@ -231,7 +231,7 @@ export default ({ onBack, payload, onSavePayload }) => {
             <Modal onClose={onClose} size={"full"} isOpen={isOpen}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Schedules</ModalHeader>
+                    <ModalHeader>{t("Schedules")}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <Center>
@@ -253,7 +253,7 @@ export default ({ onBack, payload, onSavePayload }) => {
                         </Center>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
+                        <Button onClick={onClose}>{t("Close")}</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>

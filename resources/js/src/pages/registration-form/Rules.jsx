@@ -56,8 +56,8 @@ export default ({ onProceed }) => {
                     </Box>
                     <Button backgroundColor={"teal"} onClick={onProceed}>
                         {profile?.number_of_registrations > 0
-                            ? "Register Again"
-                            : "Proceed"}
+                            ? `${t("Register Again")}`
+                            : `${t("Proceed")}`}
                     </Button>
                 </Stack>
             </CardBody>

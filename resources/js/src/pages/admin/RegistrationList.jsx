@@ -26,12 +26,14 @@ import {
 } from "@chakra-ui/react";
 import { ramakaRegistrationList } from "../../repository/registration";
 import { ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons";
+import { useTranslation } from "react-i18next";
 
 export default ({ hideHeader }) => {
     const toast = useToast();
     let [list, setList] = useState([]);
     let [isFetching, setFetching] = useState(false);
     let searchKey = "";
+    const { t } = useTranslation();
 
     const getList = () => {
         let promise = new Promise(async (resolve, reject) => {
@@ -53,10 +55,10 @@ export default ({ hideHeader }) => {
         toast.promise(promise, {
             success: { title: "Success", description: "" },
             error: {
-                title: "Error",
-                description: "Something went wrong. Try again.",
+                title: `${t("Error")}`,
+                description: `${t("Something went wrong. Try again")}`,
             },
-            loading: { title: "Getting data", description: "Please wait" },
+            loading: { title: `${t("Getting data")}`, description: `${t("Please Wait")}` },
         });
     };
 
@@ -73,7 +75,7 @@ export default ({ hideHeader }) => {
                 <Center marginBottom={"24px"}>
                     <Tooltip
                         hasArrow
-                        label="Search by rider name, federation ID, horse name or horse registration number."
+                        label={t("Search by rider name, federation ID, horse name or horse registration number")}
                         color={"white"}
                         bg="teal"
                         alignSelf={"flex-end"}
@@ -85,7 +87,7 @@ export default ({ hideHeader }) => {
 
                             <Input
                                 pr="4.5rem"
-                                placeholder="Search"
+                                placeholder={t("Search")}
                                 onChange={(val) =>
                                     (searchKey = val.target.value)
                                 }
@@ -100,7 +102,7 @@ export default ({ hideHeader }) => {
                                     isLoading={isFetching}
                                     onClick={() => getList()}
                                 >
-                                    Search
+                                    {t("Search")}
                                 </Button>
                             </InputRightElement>
                         </InputGroup>
@@ -110,11 +112,11 @@ export default ({ hideHeader }) => {
                     <Table variant="simple">
                         <Thead>
                             <Tr>
-                                <Th>Rider Name</Th>
-                                <Th>Rider Age</Th>
-                                <Th>Federation ID</Th>
-                                <Th>Horse</Th>
-                                <Th>Schedules</Th>
+                                <Th>{t("Rider name")}</Th>
+                                <Th>{t("Rider age")}</Th>
+                                <Th>{t("Federation ID Number")}</Th>
+                                <Th>{t("Horse Name")}</Th>
+                                <Th>{t("Schedules")}</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
@@ -147,7 +149,7 @@ export default ({ hideHeader }) => {
                                                         isExternal
                                                         color={"blue.400"}
                                                     >
-                                                        Official Horse Document
+                                                        {t("Horse Official Document")}
                                                         <ExternalLinkIcon mx="2px" />
                                                     </Link>
                                                 )}

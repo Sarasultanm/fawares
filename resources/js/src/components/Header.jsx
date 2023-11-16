@@ -45,6 +45,7 @@ import fawaresLightLogo from "../../../images/fawares/logo/logo-light.png";
 import fawaresDarkLogo from "../../../images/fawares/logo/logo-dark.png";
 const APP_NAME = import.meta.env.VITE_APP_NAME;
 
+
 export default () => {
     const { t, i18n } = useTranslation();
     const { profile, isFetching } = useSelector((state) => state.user);
@@ -54,6 +55,7 @@ export default () => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
+
 
     const fetchProfile = async () => {
         try {
@@ -136,7 +138,7 @@ export default () => {
                                         navigate("/registration/list")
                                     }
                                 >
-                                    Registration List
+                                    {t("Registration List")}
                                 </MenuItem>
                                 <MenuItem
                                     onClick={async () => {
@@ -147,7 +149,7 @@ export default () => {
                                         window.location.reload();
                                     }}
                                 >
-                                    Logout
+                                    {t("Logout")}
                                 </MenuItem>
                             </MenuGroup>
                         </MenuList>

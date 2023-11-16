@@ -12,18 +12,20 @@ import Header from "../../components/Header";
 import { HiViewGrid, HiPencilAlt } from "react-icons/hi";
 import Dashboard from "./Dashboard";
 import RegistrationList from "./RegistrationList";
+import { useTranslation } from "react-i18next";
 
 export default () => {
+    const { t } = useTranslation();
     return (
         <>
             <Header />
             <Tabs variant="enclosed" margin={"0px 16px"}>
                 <TabList>
                     <Tab>
-                        <HiViewGrid /> Dashboard
+                        <HiViewGrid /> {t("Dashboard")}
                     </Tab>
                     <Tab>
-                        <HiPencilAlt /> Registrations
+                        <HiPencilAlt /> {t("Registrations")}
                     </Tab>
                 </TabList>
                 <TabPanels>

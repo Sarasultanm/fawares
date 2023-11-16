@@ -12,9 +12,11 @@ import {
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import { signUp } from "../../../repository/user";
+import { useTranslation } from "react-i18next";
 
 export default () => {
     const toast = useToast();
+    const { t } = useTranslation();
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -33,7 +35,7 @@ export default () => {
                 if (!values) return;
                 if (values.password != values.confirmPassword) {
                     toast({
-                        title: "Password and confirm password does not match.",
+                        title: `${t("Password and confirm password does not match.")}`,
                         status: "error",
                         isClosable: true,
                         position: "top",
@@ -45,7 +47,7 @@ export default () => {
                     await signUp(values);
                     actions.resetForm();
                     toast({
-                        title: "You have successfully registered! You may now proceed to login.",
+                        title: `${t("You have successfully registered! You may now proceed to login.")}`,
                         status: "success",
                         isClosable: true,
                         position: "top",
@@ -54,7 +56,7 @@ export default () => {
                     toast({
                         title:
                             e?.message ||
-                            "An error occurred. Please try again.",
+                            `${t("An error occurred. Please try again.")}`,
                         status: "error",
                         isClosable: true,
                         position: "top",
@@ -70,7 +72,7 @@ export default () => {
                         name="name"
                         validate={(value) => {
                             if (!value) {
-                                return "Full name is required";
+                                return `${t("Full name is required")}`;
                             }
                             return null;
                         }}
@@ -81,8 +83,8 @@ export default () => {
                                     form.errors.name && form.touched.name
                                 }
                             >
-                                <FormLabel>Full name</FormLabel>
-                                <Input {...field} placeholder="Full name" />
+                                <FormLabel>{t("Full Name")}</FormLabel>
+                                <Input {...field} placeholder={t("Full Name")} />
                                 <FormErrorMessage>
                                     {form.errors.name}
                                 </FormErrorMessage>
@@ -94,7 +96,7 @@ export default () => {
                         name="email"
                         validate={(value) => {
                             if (!value) {
-                                return "Email is required";
+                                return `${t("Email is required")}`;
                             }
                             return null;
                         }}
@@ -105,8 +107,8 @@ export default () => {
                                     form.errors.email && form.touched.email
                                 }
                             >
-                                <FormLabel>Email</FormLabel>
-                                <Input {...field} placeholder="Email" />
+                                <FormLabel>{t("Email")}</FormLabel>
+                                <Input {...field} placeholder={t("Email")} />
                                 <FormErrorMessage>
                                     {form.errors.email}
                                 </FormErrorMessage>
@@ -118,7 +120,7 @@ export default () => {
                         name="password"
                         validate={(value) => {
                             if (!value) {
-                                return "Password is required";
+                                return `${t("Password is required")}`;
                             }
                             return null;
                         }}
@@ -130,14 +132,14 @@ export default () => {
                                     form.touched.password
                                 }
                             >
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel>{t("Password")}</FormLabel>
                                 <InputGroup size="md">
                                     <Input
                                         {...field}
                                         type={
                                             showPassword ? "text" : "password"
                                         }
-                                        placeholder="Password"
+                                        placeholder={t("Password")}
                                     />
                                     <InputRightElement width="4.5rem">
                                         <Button
@@ -147,7 +149,7 @@ export default () => {
                                                 setShowPassword(!showPassword)
                                             }
                                         >
-                                            {showPassword ? "Hide" : "Show"}
+                                            {showPassword ? `${t("Hide")}` : `${t("Show")}`}
                                         </Button>
                                     </InputRightElement>
                                 </InputGroup>
@@ -162,7 +164,7 @@ export default () => {
                         name="confirmPassword"
                         validate={(value) => {
                             if (!value) {
-                                return "Confirm password is required";
+                                return `${t("Confirm password is required")}`;
                             }
                             return null;
                         }}
@@ -174,7 +176,7 @@ export default () => {
                                     form.touched.confirmPassword
                                 }
                             >
-                                <FormLabel>Confirm Password</FormLabel>
+                                <FormLabel>{t("Confirm Password")}</FormLabel>
                                 <InputGroup size="md">
                                     <Input
                                         {...field}
@@ -183,7 +185,7 @@ export default () => {
                                                 ? "text"
                                                 : "password"
                                         }
-                                        placeholder="Confirm Password"
+                                        placeholder={t("Confirm Password")}
                                     />
                                     <InputRightElement width="4.5rem">
                                         <Button
@@ -196,8 +198,7 @@ export default () => {
                                             }
                                         >
                                             {showConfirmPassword
-                                                ? "Hide"
-                                                : "Show"}
+                                                ? `${t("Hide")}` : `${t("Show")}`}
                                         </Button>
                                     </InputRightElement>
                                 </InputGroup>
@@ -214,7 +215,7 @@ export default () => {
                         isLoading={props.isSubmitting}
                         type="submit"
                     >
-                        Submit
+                        {t("Submit")}
                     </Button>
                 </Form>
             )}

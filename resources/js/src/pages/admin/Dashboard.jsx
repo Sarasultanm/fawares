@@ -24,6 +24,7 @@ import {
     Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useTranslation } from "react-i18next";
 
 export default () => {
     const toast = useToast();
@@ -31,6 +32,7 @@ export default () => {
     let [numberOfHorses, setNumberOfHorses] = useState(0);
     let [schedules, setSchedules] = useState([]);
     let [isFetching, setFetching] = useState(false);
+    const { t } = useTranslation();
 
     ChartJS.register(
         CategoryScale,
@@ -68,12 +70,12 @@ export default () => {
         });
 
         toast.promise(promise, {
-            success: { title: "Success", description: "" },
+            success: { title: `${t("Success")}`, description: "" },
             error: {
-                title: "Error",
-                description: "Something went wrong. Try again.",
+                title: `${t("Error")}`,
+                description: `${t("Something went wrong. Try again")}`,
             },
-            loading: { title: "Getting data", description: "Please wait" },
+            loading: { title: `${t("Getting data")}`, description: `${t("Please Wait" )}`},
         });
     };
 
@@ -127,7 +129,7 @@ export default () => {
 
     return isFetching ? (
         <Center height={"80vh"}>
-            <Text>Please wait...</Text>
+            <Text>{t("Please Wait")}</Text>
             <div id="chartContainer" />
         </Center>
     ) : (
@@ -141,14 +143,14 @@ export default () => {
                 <StatGroup>
                     <Stat>
                         <StatLabel fontWeight={"bold"} fontSize={"md"}>
-                            Number of Horses Registered
+                            {t("Number of Horses Registered")}
                         </StatLabel>
                         <StatNumber>{numberOfHorses}</StatNumber>
                     </Stat>
 
                     <Stat>
                         <StatLabel fontWeight={"bold"} fontSize={"md"}>
-                            Number of Riders Registered
+                            {t("Number of Riders Registered")}
                         </StatLabel>
                         <StatNumber>{numberOfFederations}</StatNumber>
                     </Stat>
@@ -157,7 +159,7 @@ export default () => {
 
             <Card padding={"16px"}>
                 <Text fontWeight={"bold"} marginBottom={"16px"} fontSize={"md"}>
-                    Registrations per Schedule
+                    {t("Registrations per Schedule")}
                     <Bar options={options} data={data} />
                 </Text>
             </Card>
