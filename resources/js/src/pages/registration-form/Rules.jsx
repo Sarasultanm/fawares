@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+const APP_NAME = import.meta.env.VITE_APP_NAME;
 
 export default ({ onProceed }) => {
     const { profile, isFetching } = useSelector((state) => state.user);
@@ -23,37 +24,23 @@ export default ({ onProceed }) => {
 
             <CardBody>
                 <Stack divider={<StackDivider />} spacing="4">
-                    <Text>{t("Rules Description")}</Text>
-                    <Box>
-                        <Text pt="2" fontSize="sm">
-                            {t("Rule 1")}
-                        </Text>
-                    </Box>
-                    <Box>
-                        <Text pt="2" fontSize="sm">
-                            {t("Rule 2")}
-                        </Text>
-                    </Box>
-                    <Box>
-                        <Text pt="2" fontSize="sm">
-                            {t("Rule 3")}
-                        </Text>
-                    </Box>
-                    <Box>
-                        <Text pt="2" fontSize="sm">
-                            {t("Rule 4")}
-                        </Text>
-                    </Box>
-                    <Box>
-                        <Text pt="2" fontSize="sm">
-                            {t("Rule 5")}
-                        </Text>
-                    </Box>
-                    <Box>
-                        <Text pt="2" fontSize="sm">
-                            {t("Rule 6")}
-                        </Text>
-                    </Box>
+                    <Text>{t(`${APP_NAME.toLowerCase()}_rules_desc`)}</Text>
+
+                    {[...Array(APP_NAME == "RAMAKA" ? 6 : 9).keys()].map(
+                        (e, i) => (
+                            <Box>
+                                <Text pt="2" fontSize="sm">
+                                    {i + 1}.{" "}
+                                    {t(
+                                        `${APP_NAME.toLowerCase()}_rule_${
+                                            i + 1
+                                        }`
+                                    )}
+                                </Text>
+                            </Box>
+                        )
+                    )}
+
                     <Button backgroundColor={"teal"} onClick={onProceed}>
                         {profile?.number_of_registrations > 0
                             ? `${t("Register Again")}`
