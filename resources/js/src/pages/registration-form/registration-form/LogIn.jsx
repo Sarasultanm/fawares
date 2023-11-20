@@ -45,7 +45,9 @@ export default () => {
                 } catch (e) {
                     console.log(e);
                     toast({
-                        title: `${t("An error occurred. Please try again.")}`,
+                        title:
+                            e?.message ||
+                            `${t("An error occurred. Please try again.")}`,
                         status: "error",
                         isClosable: true,
                         position: "top",
@@ -114,7 +116,9 @@ export default () => {
                                                 setShowPassword(!showPassword)
                                             }
                                         >
-                                            {showPassword ? `${t("Hide")}` : `${t("Show")}`}
+                                            {showPassword
+                                                ? `${t("Hide")}`
+                                                : `${t("Show")}`}
                                         </Button>
                                     </InputRightElement>
                                 </InputGroup>

@@ -195,6 +195,18 @@ export default ({ onBack, payload, onSavePayload }) => {
                     </RadioGroup>
                 </CardHeader>
             </Card>
+            <Button
+                colorScheme="yellow"
+                variant="outline"
+                marginBottom={"16"}
+                type="button"
+                onClick={() => {
+                    setScheduleA("");
+                    setScheduleB("");
+                }}
+            >
+                {t("Reset Selection")}
+            </Button>
             <Flex>
                 <Button
                     colorScheme="teal"
@@ -210,9 +222,11 @@ export default ({ onBack, payload, onSavePayload }) => {
                     background={"teal"}
                     isLoading={isRegistering}
                     onClick={() => {
-                        if (!selectedScheduleA || !selectedScheduleB) {
+                        if (!selectedScheduleA && !selectedScheduleB) {
                             toast({
-                                title: `${t("Please select schedule for second and first day.")}`,
+                                title: `${t(
+                                    "Please select at least one schedule."
+                                )}`,
                                 status: "error",
                                 isClosable: true,
                                 position: "top",

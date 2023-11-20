@@ -51,12 +51,14 @@ class Main extends Controller
 
         $schedules = (explode(",", $schedules));
         foreach ($schedules as $scheduleId) {
-            SelectedSchedule::create(
-                [
-                    "registration_id" => $registration->id,
-                    "schedule_id" => $scheduleId
-                ]
-            );
+            if (!empty($scheduleId) && $scheduleId != "null") {
+                SelectedSchedule::create(
+                    [
+                        "registration_id" => $registration->id,
+                        "schedule_id" => $scheduleId
+                    ]
+                );
+            }
         }
 
         return response([

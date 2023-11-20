@@ -159,7 +159,9 @@ export default () => {
                                 setShowRules(true);
                                 setActiveStep(1);
                                 toast({
-                                    title: `${t("You have successfully registered!")}`,
+                                    title: `${t(
+                                        "You have successfully registered!"
+                                    )}`,
                                     status: "success",
                                     isClosable: true,
                                     position: "top",

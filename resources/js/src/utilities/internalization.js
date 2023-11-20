@@ -80,9 +80,10 @@ const resources = {
             Proceed: "Proceed",
             "First Day": "First Day",
             "Second Day": "Second Day",
-            "Please select schedule for second and first day.":
-                "Please select schedule for second and first day.",
+            "Please select at least one schedule.":
+                "Please select at least one schedule.",
             Or: "Or",
+            "Reset Selection": "Reset Selection",
             Rules: "Rules and regulations of the competition",
             ramaka_rules_desc:
                 "Conditions for registration in the Ramaka Championships for young horses.",
@@ -185,8 +186,8 @@ const resources = {
             Proceed: "المتابعة",
             "First Day": "اليوم الأول",
             "Second Day": "اليوم الثاني",
-            "Please select schedule for second and first day.":
-                "يرجى اختيار الجدول الزمني لليوم الثاني والأول.",
+            "Please select at least one schedule.":
+                "الرجاء تحديد جدول زمني واحد على الأقل",
             Or: "أو",
             ramaka_rules_desc:
                 "شروط التسجيل في بطولات رمكة لخيول الأعمار الصغيرة",
@@ -214,6 +215,7 @@ const resources = {
             fawares_rule_8: "تسديد الاشتراكات قبل دخول الأشواط",
             fawares_rule_9:
                 "يمنع الخيول المشاركة في اشواط الاتحاد لخيول الاعمار الصغيرة المشاركة في اشواط فوارس",
+            "Reset Selection": "إعادة تعيين التحديد",
         },
     },
 };

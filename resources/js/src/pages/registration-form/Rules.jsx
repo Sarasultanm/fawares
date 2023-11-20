@@ -28,7 +28,7 @@ export default ({ onProceed }) => {
 
                     {[...Array(APP_NAME == "RAMAKA" ? 6 : 9).keys()].map(
                         (e, i) => (
-                            <Box>
+                            <Box key={i}>
                                 <Text pt="2" fontSize="sm">
                                     {i + 1}.{" "}
                                     {t(
