@@ -51,7 +51,7 @@ const resources = {
             "Please Wait": "Please wait...",
             "Number of Horses Registered": "Number of Horses Registered",
             "Number of Riders Registered": "Number of Riders Registered",
-            "Registrations per Schedule": "Registrations per Schedule,",
+            "Registrations per Schedule": "Registrations per Schedule",
             Dashboard: "Dashboard",
             Registrations: "Registrations",
             Search: "Search",

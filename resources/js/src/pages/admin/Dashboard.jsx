@@ -13,6 +13,8 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import { registrationDashboard } from "../../repository/registration";
+const APP_NAME = import.meta.env.VITE_APP_NAME;
+import moment from "moment";
 
 import {
     Chart as ChartJS,
@@ -58,7 +60,11 @@ export default () => {
                 setNumberOfFederations(
                     result?.number_of_federations_registered?.length
                 );
-                setSchedules(result?.registrations_per_schedule || []);
+                setSchedules(
+                    (result?.registrations_per_schedule || []).filter(
+                        (e) => e.registrations_count > 0
+                    )
+                );
 
                 setFetching(false);
                 resolve("Success");
@@ -75,7 +81,10 @@ export default () => {
                 title: `${t("Error")}`,
                 description: `${t("Something went wrong. Try again")}`,
             },
-            loading: { title: `${t("Getting data")}`, description: `${t("Please Wait" )}`},
+            loading: {
+                title: `${t("Getting data")}`,
+                description: `${t("Please Wait")}`,
+            },
         });
     };
 
@@ -84,7 +93,11 @@ export default () => {
     }, []);
 
     const data = {
-        labels: schedules.map((e) => `${e?.date} | ${e?.description}`),
+        labels: schedules.map((e) =>
+            APP_NAME == "RAMAKA"
+                ? `${moment(e?.date).format("MMM DD YYYY")} | ${e?.description}`
+                : `${moment(e?.date).format("YYYY")} | ${e?.description}`
+        ),
         datasets: [
             {
                 label: "Registrations",

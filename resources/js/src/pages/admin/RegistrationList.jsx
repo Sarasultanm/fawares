@@ -27,6 +27,8 @@ import {
 import { ramakaRegistrationList } from "../../repository/registration";
 import { ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
+import moment from "moment";
+const APP_NAME = import.meta.env.VITE_APP_NAME;
 
 export default ({ hideHeader }) => {
     const toast = useToast();
@@ -58,7 +60,10 @@ export default ({ hideHeader }) => {
                 title: `${t("Error")}`,
                 description: `${t("Something went wrong. Try again")}`,
             },
-            loading: { title: `${t("Getting data")}`, description: `${t("Please Wait")}` },
+            loading: {
+                title: `${t("Getting data")}`,
+                description: `${t("Please Wait")}`,
+            },
         });
     };
 
@@ -75,7 +80,9 @@ export default ({ hideHeader }) => {
                 <Center marginBottom={"24px"}>
                     <Tooltip
                         hasArrow
-                        label={t("Search by rider name, federation ID, horse name or horse registration number")}
+                        label={t(
+                            "Search by rider name, federation ID, horse name or horse registration number"
+                        )}
                         color={"white"}
                         bg="teal"
                         alignSelf={"flex-end"}
@@ -149,7 +156,9 @@ export default ({ hideHeader }) => {
                                                         isExternal
                                                         color={"blue.400"}
                                                     >
-                                                        {t("Horse Official Document")}
+                                                        {t(
+                                                            "Horse Official Document"
+                                                        )}
                                                         <ExternalLinkIcon mx="2px" />
                                                     </Link>
                                                 )}
@@ -169,11 +178,18 @@ export default ({ hideHeader }) => {
                                                                 fontSize="0.8em"
                                                                 colorScheme="green"
                                                             >
-                                                                {
-                                                                    e
-                                                                        ?.sched_data
-                                                                        ?.date
-                                                                }
+                                                                {e?.sched_data
+                                                                    ?.description &&
+                                                                    moment(
+                                                                        e
+                                                                            ?.sched_data
+                                                                            ?.date
+                                                                    ).format(
+                                                                        APP_NAME ==
+                                                                            "FAWARES"
+                                                                            ? "YYYY"
+                                                                            : "MMM DD, YYYY"
+                                                                    )}
                                                             </Badge>
                                                         </Text>
                                                     </div>

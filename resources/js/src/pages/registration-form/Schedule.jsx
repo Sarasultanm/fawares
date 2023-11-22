@@ -82,19 +82,19 @@ export default ({ onBack, payload, onSavePayload }) => {
                       id: "1",
                       date: "2023-12-22",
                       age: "4-5",
-                      description: "Extra - Small",
+                      description: "Small",
                   },
                   {
                       id: "2",
                       date: "2023-12-22",
                       age: "5-6",
-                      description: "Extra 2 - Medium",
+                      description: "Medium",
                   },
                   {
                       id: "3",
                       date: "2023-12-22",
                       age: "6-7",
-                      description: "Extra 3 - Big",
+                      description: "Big",
                   },
               ];
 
@@ -121,24 +121,24 @@ export default ({ onBack, payload, onSavePayload }) => {
                   },
               ]
             : [
-                  {
-                      id: "4",
-                      date: "2023-12-23",
-                      age: "4-5",
-                      description: "Extra - Small",
-                  },
-                  {
-                      id: "5",
-                      date: "2023-12-23",
-                      age: "5-6",
-                      description: "Extra 2 - Medium",
-                  },
-                  {
-                      id: "6",
-                      date: "2023-12-23",
-                      age: "6-7",
-                      description: "Extra 3 - Big",
-                  },
+                  //   {
+                  //       id: "4",
+                  //       date: "2023-12-23",
+                  //       age: "4-5",
+                  //       description: "Extra - Small",
+                  //   },
+                  //   {
+                  //       id: "5",
+                  //       date: "2023-12-23",
+                  //       age: "5-6",
+                  //       description: "Extra 2 - Medium",
+                  //   },
+                  //   {
+                  //       id: "6",
+                  //       date: "2023-12-23",
+                  //       age: "6-7",
+                  //       description: "Extra 3 - Big",
+                  //   },
               ];
 
     return (
@@ -156,10 +156,12 @@ export default ({ onBack, payload, onSavePayload }) => {
             />
             <Card marginBottom={"30px"}>
                 <CardHeader>
-                    <Heading size="sm" marginBottom={"16px"}>
-                        {t("First Day")}{" "}
-                        {moment(scheduleA[0].date).format("MMMM DD, YYYY")}
-                    </Heading>
+                    {APP_NAME == "RAMAKA" && (
+                        <Heading size="sm" marginBottom={"16px"}>
+                            {t("First Day")}{" "}
+                            {moment(scheduleA[0].date).format("MMMM DD, YYYY")}
+                        </Heading>
+                    )}
                     <RadioGroup
                         value={selectedScheduleA}
                         onChange={(e) => setScheduleA(e)}
@@ -175,26 +177,28 @@ export default ({ onBack, payload, onSavePayload }) => {
                 </CardHeader>
             </Card>
 
-            <Card marginBottom={"30px"}>
-                <CardHeader>
-                    <Heading size="sm" marginBottom={"16px"}>
-                        {t("Second Day")}{" "}
-                        {moment(scheduleB[0].date).format("MMMM DD, YYYY")}
-                    </Heading>
-                    <RadioGroup
-                        value={selectedScheduleB}
-                        onChange={(e) => setScheduleB(e)}
-                    >
-                        <Stack>
-                            {scheduleB.map((e) => (
-                                <Radio key={e.id} value={e.id}>
-                                    {e.description}
-                                </Radio>
-                            ))}
-                        </Stack>
-                    </RadioGroup>
-                </CardHeader>
-            </Card>
+            {scheduleB.length > 0 && (
+                <Card marginBottom={"30px"}>
+                    <CardHeader>
+                        <Heading size="sm" marginBottom={"16px"}>
+                            {t("Second Day")}{" "}
+                            {moment(scheduleB[0].date).format("MMMM DD, YYYY")}
+                        </Heading>
+                        <RadioGroup
+                            value={selectedScheduleB}
+                            onChange={(e) => setScheduleB(e)}
+                        >
+                            <Stack>
+                                {scheduleB.map((e) => (
+                                    <Radio key={e.id} value={e.id}>
+                                        {e.description}
+                                    </Radio>
+                                ))}
+                            </Stack>
+                        </RadioGroup>
+                    </CardHeader>
+                </Card>
+            )}
             <Button
                 colorScheme="yellow"
                 variant="outline"
