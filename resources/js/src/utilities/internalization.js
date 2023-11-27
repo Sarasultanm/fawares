@@ -88,33 +88,34 @@ const resources = {
             ramaka_rules_desc:
                 "Conditions for registration in the Ramaka Championships for young horses.",
             ramaka_rule_1:
-                "The rider is not allowed to change the horse’s level until the end of the Ramkah season (the Ramkah season begins at the beginning of the calendar year and ends at its end).",
+                "The rider is not allowed to change the horse’s level until the end of the young horse competition season for the year 2023.",
             ramaka_rule_2:
                 "The rider has the right to participate with two horses in each race.",
             ramaka_rule_3:
                 "Horses are not allowed to participate at the level below their age unless it is their first year of participation.",
             ramaka_rule_4:
-                "Horsemen must bring their horses’ passport/document before the start of the tournament or upload it to the registration site.",
+                "Riders must bring their horses ‘passport/document begore the start of the tournament or upload it to the registration site.",
             ramaka_rule_5:
-                "Ramkah races are subject to international laws regarding races for young horses and everything new in that regard.",
+                "Ramaka races are subject to international laws regarding races for young horses and everything new in that regard.",
             ramaka_rule_6:
-                "Beginners/children under 16 years old are not allowed to participate in Ramka tournaments for young ages.",
-            fawares_rules_desc: "Rules And Regulations of Fawares competition",
+                "Beginners/children under 16 years old are not allowed to participate in Ramaka tournaments for young ages.",
+            fawares_rules_desc: "Rules And Regulations of Fawares Competition",
             fawares_rule_1:
-                "The rider is allowed to participate with two horses for each level.",
+                "The rider has the right to participate with two horses in each race.",
             fawares_rule_2:
-                "The horse is allowed to participate in one race during the day, with the exception of the beginners race.",
-            fawares_rule_3: "Commitment to the official tournament uniform.",
+                "Horse is only allowed to compete in one class for the day.",
+            fawares_rule_3:
+                "Rider is obliged to participate in competition formal wear.",
             fawares_rule_4:
-                "Adherence to the regulations of the Saudi Equestrian Federation.",
+                "Participants are obliged to act in accordance with the Saudi Equestrian federation rules.",
             fawares_rule_5:
-                "Championship participants must be members of the Saudi Equestrian Federation.",
-            fawares_rule_6: "Registration opens starting December 14th.",
-            fawares_rule_7: "Registration closes on December 20.",
+                "Riders have to be registered members of the Saudi Equestrian federation.",
+            fawares_rule_6: "Registration opens on the 14th of Dec.",
+            fawares_rule_7: "Registration ends on the 20th of Dec.",
             fawares_rule_8:
-                "Payment of subscriptions before entering the rounds.",
+                "Participation fees are to be paid before the rider and horse enter the competition.",
             fawares_rule_9:
-                "Horses are prohibited from participating in the federation’s races for horses of young ages participating in the Knights’ races.",
+                "Horses Participating in the young horse classes are not allowed to compete In Fawares classes.",
         },
     },
     ar: {
@@ -192,29 +193,28 @@ const resources = {
             ramaka_rules_desc:
                 "شروط التسجيل في بطولات رمكة لخيول الأعمار الصغيرة",
             ramaka_rule_1:
-                "- لا يسمح للفارس تغيير مستوى الجواد حتى نهاية موسم رمكة (موسم رمكة يبدأ من بداية السنة الميلادية وينتهي بنهايتها).",
-            ramaka_rule_2: "- يحق للفارس المشاركة بجوادين بكل شوط.",
+                "لا يسمح للفارس تغيير مستوى الجواد حتى نهاية موسم الخيول الأعمار الصغيرة لسنة 2023.",
+            ramaka_rule_2: "يحق للفارس المشاركة بجوادين بكل شوط.",
             ramaka_rule_3:
-                "- لا يسمح للجياد المشاركة في المستوى الأقل لعمرها إلا إذا كانت أول سنة لمشاركتها.",
+                "لا يسمح للجياد المشاركة في المستوى الأقل لعمرها إلا إذا كانت أول سنة لمشاركتها.",
             ramaka_rule_4:
-                "- يجب على الفرسان إحضار(جواز/وثيقة) جيادهم فبل بداية البطولة أو رفعها على موقع التسجيل.",
+                "يجب على الفرسان إحضار(جواز/وثيقة) جيادهم فبل بداية البطولة أو رفعها على موقع التسجيل.",
             ramaka_rule_5:
-                "- تخضع أشواط رمكة للقوانين الدولية فيما يخص أشواط الخيول الصغيرة وكل ما يستجد في ذلك.",
+                "تخضع أشواط رمكة للقوانين الدولية فيما يخص أشواط الخيول الصغيرة وكل ما يستجد في ذلك.",
             ramaka_rule_6:
-                "- لا يسمح للـ (المبتدأين / الأطفال أقل من 16 سنة) بالمشاركة في بطولات رمكة للأعمار الصغيرة.",
+                "ا يسمح للـ (المبتدأين / الأطفال أقل من 16 سنة) بالمشاركة في بطولات رمكة للأعمار الصغيرة.",
             fawares_rules_desc: "شروط التسجيل في بطولات فوارس",
-            fawares_rule_1: "يسمح للفارس المشاركة بجوادين لكل مستوى",
-            fawares_rule_2:
-                "يسمح للجواد المشاركة بشوط واحد خلال اليوم باستثناء شوط المبتدئين.",
-            fawares_rule_3: "الالتزام بالزي الرسمي للبطولة",
-            fawares_rule_4: "الالتزام بأنظمة الاتحاد السعودي للفروسية",
+            fawares_rule_1: ". يسمح للفارس المشاركة بجوادين لكل مستوى",
+            fawares_rule_2: "يسمح للجواد المشاركة بشوط واحد خلال اليوم.",
+            fawares_rule_3: "الالتزام بالزي الرسمي للبطولة.",
+            fawares_rule_4: "الالتزام بأنظمة الاتحاد السعودي للفروسية.",
             fawares_rule_5:
-                " يجب على المشاركين بالبطولة ان يكونوا اعضاء بالاتحاد السعودي للفروسية",
-            fawares_rule_6: "يفتح التسجيل بداية من يوم ١٤ ديسمبر",
-            fawares_rule_7: "يغلق التسجيل يوم ٢٠ ديسمبر",
-            fawares_rule_8: "تسديد الاشتراكات قبل دخول الأشواط",
+                "يجب على المشاركين بالبطولة ان يكونوا اعضاء بالاتحاد السعودي للفروسية.",
+            fawares_rule_6: "يفتح التسجيل بداية من يوم ١٤ ديسمبر.",
+            fawares_rule_7: "يغلق التسجيل يوم ٢٠ ديسمبر.",
+            fawares_rule_8: "تسديد الاشتراكات قبل دخول الأشواط.",
             fawares_rule_9:
-                "يمنع الخيول المشاركة في اشواط الاتحاد لخيول الاعمار الصغيرة المشاركة في اشواط فوارس",
+                "يمنع الخيول المشاركة في اشواط الاتحاد لخيول الاعمار الصغيرة المشاركة في اشواط فوارس.",
             "Reset Selection": "إعادة تعيين التحديد",
         },
     },
