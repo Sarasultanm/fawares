@@ -90,18 +90,18 @@ const resources = {
             ramaka_rule_1:
                 "The rider is not allowed to change the horse’s level until the end of the young horse competition season for the year 2023.",
             ramaka_rule_2:
-                "The rider has the right to participate with two horses in each race.",
+                "The rider has the right to participate with two horses in each class.",
             ramaka_rule_3:
                 "Horses are not allowed to participate at the level below their age unless it is their first year of participation.",
             ramaka_rule_4:
-                "Riders must bring their horses ‘passport/document begore the start of the tournament or upload it to the registration site.",
+                "Riders must bring their horses ‘passport/document before the start of the tournament or upload it to the registration site.",
             ramaka_rule_5:
-                "Ramaka races are subject to international laws regarding races for young horses and everything new in that regard.",
+                "Ramaka competitions are subject to international laws regarding races for young horses and everything new in that regard.",
             ramaka_rule_6:
-                "Beginners/children under 16 years old are not allowed to participate in Ramaka tournaments for young ages.",
+                "Beginners/children under 16 years of age are not allowed to participate in Ramaka competitions.",
             fawares_rules_desc: "Rules And Regulations of Fawares Competition",
             fawares_rule_1:
-                "The rider has the right to participate with two horses in each race.",
+                "The rider has the right to participate with two horses in each class.",
             fawares_rule_2:
                 "Horse is only allowed to compete in one class for the day.",
             fawares_rule_3:
@@ -115,7 +115,7 @@ const resources = {
             fawares_rule_8:
                 "Participation fees are to be paid before the rider and horse enter the competition.",
             fawares_rule_9:
-                "Horses Participating in the young horse classes are not allowed to compete In Fawares classes.",
+                "Horses participating in the young horse classes are not allowed to compete In Fawares classes.",
         },
     },
     ar: {
@@ -193,18 +193,18 @@ const resources = {
             ramaka_rules_desc:
                 "شروط التسجيل في بطولات رمكة لخيول الأعمار الصغيرة",
             ramaka_rule_1:
-                "لا يسمح للفارس تغيير مستوى الجواد حتى نهاية موسم الخيول الأعمار الصغيرة لسنة 2023.",
+                "ا يسمح للفارس تغيير مستوى الجواد حتى نهاية موسم الخيول الأعمار الصغيرة لسنة 2023.",
             ramaka_rule_2: "يحق للفارس المشاركة بجوادين بكل شوط.",
             ramaka_rule_3:
                 "لا يسمح للجياد المشاركة في المستوى الأقل لعمرها إلا إذا كانت أول سنة لمشاركتها.",
             ramaka_rule_4:
-                "يجب على الفرسان إحضار(جواز/وثيقة) جيادهم فبل بداية البطولة أو رفعها على موقع التسجيل.",
+                " يجب على الفرسان إحضار(جواز/وثيقة) جيادهم فبل بداية البطولة أو رفعها على موقع التسجيل.",
             ramaka_rule_5:
                 "تخضع أشواط رمكة للقوانين الدولية فيما يخص أشواط الخيول الصغيرة وكل ما يستجد في ذلك.",
             ramaka_rule_6:
-                "ا يسمح للـ (المبتدأين / الأطفال أقل من 16 سنة) بالمشاركة في بطولات رمكة للأعمار الصغيرة.",
+                "لا يسمح للـ (المبتدأين / الأطفال أقل من 16 سنة) بالمشاركة في بطولات رمكة للأعمار الصغيرة.",
             fawares_rules_desc: "شروط التسجيل في بطولات فوارس",
-            fawares_rule_1: "يسمح للفارس المشاركة بجوادين لكل مستوى.",
+            fawares_rule_1: ". يسمح للفارس المشاركة بجوادين لكل مستوى",
             fawares_rule_2: "يسمح للجواد المشاركة بشوط واحد خلال اليوم.",
             fawares_rule_3: "الالتزام بالزي الرسمي للبطولة.",
             fawares_rule_4: "الالتزام بأنظمة الاتحاد السعودي للفروسية.",
