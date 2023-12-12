@@ -74,6 +74,12 @@ class Main extends Controller
             'name' => 'required|string',
         ]);
 
+        if (!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
+            return response([
+                "message" => "Invalid email format"
+            ], 403);
+        }
+
         $user = User::where('email', $request->email)->first();
 
         if (!empty($user)) {
