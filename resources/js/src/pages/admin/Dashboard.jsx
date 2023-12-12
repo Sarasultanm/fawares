@@ -11,6 +11,7 @@ import {
     useToast,
     Center,
     useColorModeValue,
+    Container,
 } from "@chakra-ui/react";
 import { registrationDashboard } from "../../repository/registration";
 const APP_NAME = import.meta.env.VITE_APP_NAME;
@@ -146,7 +147,7 @@ export default () => {
             <div id="chartContainer" />
         </Center>
     ) : (
-        <>
+        <Container>
             <Card
                 padding={"16px"}
                 marginTop={"32px"}
@@ -176,6 +177,6 @@ export default () => {
                     <Bar options={options} data={data} />
                 </Text>
             </Card>
-        </>
+        </Container>
     );
 };
