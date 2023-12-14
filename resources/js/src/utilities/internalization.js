@@ -110,7 +110,7 @@ const resources = {
                 "Participants are obliged to act in accordance with the Saudi Equestrian federation rules.",
             fawares_rule_5:
                 "Riders have to be registered members of the Saudi Equestrian federation.",
-            fawares_rule_6: "Registration opens on the 14th of Dec.",
+            fawares_rule_6: "Registration opens on the 15th of Dec.",
             fawares_rule_7: "Registration ends on the 20th of Dec.",
             fawares_rule_8:
                 "Participation fees are to be paid before the rider and horse enter the competition.",
@@ -210,7 +210,7 @@ const resources = {
             fawares_rule_4: "الالتزام بأنظمة الاتحاد السعودي للفروسية.",
             fawares_rule_5:
                 "يجب على المشاركين بالبطولة ان يكونوا اعضاء بالاتحاد السعودي للفروسية.",
-            fawares_rule_6: "يفتح التسجيل بداية من يوم ١٤ ديسمبر.",
+            fawares_rule_6: "يبدأ التسجيل يوم ١٥ ديسمبر",
             fawares_rule_7: "يغلق التسجيل يوم ٢٠ ديسمبر.",
             fawares_rule_8: "تسديد الاشتراكات قبل دخول الأشواط.",
             fawares_rule_9:
