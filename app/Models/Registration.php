@@ -26,4 +26,9 @@ class Registration extends Model
     {
         return $this->hasMany('App\Models\SelectedSchedule', 'registration_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }

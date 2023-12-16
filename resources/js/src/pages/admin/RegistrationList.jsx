@@ -23,10 +23,15 @@ import {
     Button,
     Tooltip,
     Center,
+    HStack,
 } from "@chakra-ui/react";
 import { ramakaRegistrationList } from "../../repository/registration";
 import { ExternalLinkIcon, SearchIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
+import {
+    exportAsSheetByJSON,
+    exportAsSheetByTable,
+} from "../../utilities/generate-sheet";
 import moment from "moment";
 const APP_NAME = import.meta.env.VITE_APP_NAME;
 
@@ -78,45 +83,127 @@ export default ({ hideHeader }) => {
             {!hideHeader && <Header />}
             <VStack padding={"16px 16px"}>
                 <Center marginBottom={"24px"}>
-                    <Tooltip
-                        hasArrow
-                        label={t(
-                            "Search by rider name, federation ID, horse name or horse registration number"
-                        )}
-                        color={"white"}
-                        bg="teal"
-                        alignSelf={"flex-end"}
-                    >
-                        <InputGroup size="md">
-                            <InputLeftElement pointerEvents="none">
-                                <SearchIcon color="gray.300" />
-                            </InputLeftElement>
+                    <HStack>
+                        <Tooltip
+                            hasArrow
+                            label={t(
+                                "Search by rider name, federation ID, horse name or horse registration number"
+                            )}
+                            color={"white"}
+                            bg="teal"
+                            alignSelf={"flex-end"}
+                        >
+                            <InputGroup size="md">
+                                <InputLeftElement pointerEvents="none">
+                                    <SearchIcon color="gray.300" />
+                                </InputLeftElement>
 
-                            <Input
-                                pr="4.5rem"
-                                placeholder={t("Search")}
-                                onChange={(val) =>
-                                    (searchKey = val.target.value)
+                                <Input
+                                    pr="4.5rem"
+                                    placeholder={t("Search")}
+                                    onChange={(val) =>
+                                        (searchKey = val.target.value)
+                                    }
+                                />
+                                <InputRightElement width="4.5rem">
+                                    <Button
+                                        h="1.75rem"
+                                        size="sm"
+                                        marginRight={"8px"}
+                                        backgroundColor={"teal"}
+                                        fontSize={"12px"}
+                                        isLoading={isFetching}
+                                        onClick={() => getList()}
+                                    >
+                                        {t("Search")}
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                        </Tooltip>
+                        <Button
+                            variant="solid"
+                            px={"50px"}
+                            backgroundColor={"green"}
+                            color={"white"}
+                            isLoading={isFetching}
+                            onClick={() => {
+                                let parsedList = [];
+
+                                let labels = {
+                                    rider_name: "Rider name",
+                                    user: "Rider email",
+                                    rider_age: "Rider Age",
+                                    federation_id: "Federation ID",
+                                    horse_name: "Horse Name",
+                                    pedigree: "Pedigree",
+                                    horse_registration_number:
+                                        "Horse Registration Number",
+                                    horse_document: "Horse Document",
+                                    created_at: "Registered On",
+                                    schedules: "Schedules",
+                                };
+
+                                for (let i = 0; i < list.length; i++) {
+                                    let parsedData = {};
+
+                                    Object.entries(list[i]).map(
+                                        ([key, value], i) => {
+                                            if (labels[key]) {
+                                                if (key === "schedules") {
+                                                    parsedData[labels[key]] =
+                                                        value
+                                                            ?.map((e) => {
+                                                                return `${
+                                                                    e.sched_data
+                                                                        .description
+                                                                }-${moment(
+                                                                    e.sched_data
+                                                                        .date
+                                                                ).format(
+                                                                    APP_NAME ==
+                                                                        "FAWARES"
+                                                                        ? "YYYY"
+                                                                        : "MMM DD, YYYY"
+                                                                )}`;
+                                                            })
+                                                            .join(", ");
+                                                    return;
+                                                }
+
+                                                if (key === "created_at") {
+                                                    parsedData[labels[key]] =
+                                                        moment(value).format(
+                                                            "MMMM DD, YYYY"
+                                                        );
+                                                    return;
+                                                }
+
+                                                if (key === "user") {
+                                                    parsedData[labels[key]] =
+                                                        value?.email;
+                                                    return;
+                                                }
+
+                                                parsedData[labels[key]] = value;
+                                            }
+                                        }
+                                    );
+
+                                    parsedList.push(parsedData);
                                 }
-                            />
-                            <InputRightElement width="4.5rem">
-                                <Button
-                                    h="1.75rem"
-                                    size="sm"
-                                    marginRight={"8px"}
-                                    backgroundColor={"teal"}
-                                    fontSize={"12px"}
-                                    isLoading={isFetching}
-                                    onClick={() => getList()}
-                                >
-                                    {t("Search")}
-                                </Button>
-                            </InputRightElement>
-                        </InputGroup>
-                    </Tooltip>
+
+                                return exportAsSheetByJSON({
+                                    excelData: parsedList,
+                                    fileName: `${APP_NAME} | 2023`,
+                                });
+                            }}
+                        >
+                            Export to Excel
+                        </Button>
+                    </HStack>
                 </Center>
                 <TableContainer>
-                    <Table variant="simple">
+                    <Table id="registration_table" variant="simple">
                         <Thead>
                             <Tr>
                                 <Th>{t("Rider name")}</Th>
@@ -124,26 +211,42 @@ export default ({ hideHeader }) => {
                                 <Th>{t("Federation ID Number")}</Th>
                                 <Th>{t("Horse Name")}</Th>
                                 <Th>{t("Schedules")}</Th>
+                                <Th>{t("Registered On")}</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
                             {list.map((e) => {
                                 return (
                                     <Tr key={e?.id}>
-                                        <Td>{e?.rider_name}</Td>
+                                        <Td>
+                                            <Text fontWeight={"bold"}>
+                                                {e?.rider_name}
+                                            </Text>
+                                            <Text>{e?.user?.email}</Text>
+                                        </Td>
                                         <Td>{e?.rider_age}</Td>
                                         <Td>{e?.federation_id}</Td>
                                         <Td>
                                             <VStack alignItems={"flex-start"}>
                                                 <Text>
                                                     {e?.horse_name}{" "}
-                                                    <Badge
-                                                        ml="1"
-                                                        fontSize="0.8em"
-                                                        colorScheme="green"
+                                                    <Tooltip
+                                                        hasArrow
+                                                        label={e?.pedigree}
+                                                        color={"white"}
+                                                        bg="teal"
+                                                        alignSelf={"flex-end"}
                                                     >
-                                                        {e?.pedigree}
-                                                    </Badge>
+                                                        <Badge
+                                                            ml="1"
+                                                            fontSize="0.8em"
+                                                            colorScheme="green"
+                                                            maxWidth={"200px"}
+                                                            overflow={"hidden"}
+                                                        >
+                                                            {e?.pedigree}
+                                                        </Badge>
+                                                    </Tooltip>
                                                 </Text>
                                                 <Text>
                                                     {
@@ -195,6 +298,11 @@ export default ({ hideHeader }) => {
                                                     </div>
                                                 ))}
                                             </VStack>
+                                        </Td>
+                                        <Td>
+                                            {moment(e?.created_at).format(
+                                                "MMMM DD, YYYY"
+                                            )}
                                         </Td>
                                     </Tr>
                                 );

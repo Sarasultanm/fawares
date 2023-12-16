@@ -177,7 +177,7 @@ class Main extends Controller
     public function list_registration(Request $request)
     {
         $searchKey = $request->query('searchKey');
-        $registrationList = Registration::with('schedules');
+        $registrationList = Registration::with('schedules')->with('user');
 
         if (!empty($searchKey)) {
             $registrationList->where(function ($query) use ($searchKey) {
