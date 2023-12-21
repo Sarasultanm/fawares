@@ -19,6 +19,10 @@ class Main extends Controller
     public function register(Request $request)
     {
 
+        return response([
+            "message" => "Registration has ended"
+        ], 403);
+
         $rider_name = $request->riderName;
         $rider_age = $request->riderAge;
         $federation_id = $request->federationId;

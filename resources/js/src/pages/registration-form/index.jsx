@@ -17,6 +17,7 @@ import {
     Flex,
     Spacer,
     Divider,
+    Button,
 } from "@chakra-ui/react";
 import { Box, Text, VStack } from "@chakra-ui/react";
 import RiderInformation from "./RiderInformation";
@@ -35,6 +36,7 @@ import { verifyGoogleAuth } from "../../repository/user";
 import { ramakaRegistration } from "../../repository/registration";
 import { ArrowForwardIcon, WarningIcon } from "@chakra-ui/icons";
 import UserRegistration from "./UserRegistration";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default () => {
     const { t } = useTranslation();
@@ -45,6 +47,8 @@ export default () => {
 
     let [showRules, setShowRules] = useState(true);
     let [payload, setPayload] = useState({});
+
+    const navigate = useNavigate();
 
     const steps = [
         { title: t("Rider Information"), description: "" },
@@ -68,6 +72,23 @@ export default () => {
 
     if (!profile) {
         return <UserRegistration />;
+    }
+
+    if (true) {
+        return (
+            <Center height={"80vh"}>
+                <VStack>
+                    <Text>Registration has ended (انتهى التسجيل)</Text>
+                    {/* <Button
+                        marginTop={"20px"}
+                        backgroundColor={"teal"}
+                        onClick={() => navigate("/registration/list")}
+                    >
+                        See Registrations (انظر التسجيلات)
+                    </Button> */}
+                </VStack>
+            </Center>
+        );
     }
 
     if (showRules) {
